@@ -392,7 +392,7 @@ def build_event_pages():
         prev_ev = events[(idx + 1) % len(events)]
         next_ev = events[(idx - 1) % len(events)]
         year     = str(ev['year'])
-        venue_short = "The Mayor's Mansion" if 'Mayor' in ev.get('venue','') else 'European Chalet'
+        venue_short = ev.get('venue', 'European Chalet Banquets')
 
         # Honoree cards
         honoree_cards_html = ''
