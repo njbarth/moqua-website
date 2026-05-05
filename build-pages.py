@@ -80,7 +80,7 @@ def bio_to_paragraphs(text):
 
 def nav_html(depth, active):
     prefix = '../' * depth
-    logo_src = prefix + 'images/awards/C-100919-BSA-OA-Centurion-Medal-v2-Texas-MC-FRONT-754x1024.jpg'
+    logo_src = '/logo-400x400.png'
     def a(section, label):
         cls = ' class="active"' if active == section else ''
         return f'<li><a href="{prefix}{section}/index.html"{cls}>{label}</a></li>'
