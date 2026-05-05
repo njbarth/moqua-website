@@ -80,6 +80,7 @@ def bio_to_paragraphs(text):
 
 def nav_html(depth, active):
     prefix = '../' * depth
+    logo_src = prefix + 'images/awards/C-100919-BSA-OA-Centurion-Medal-v2-Texas-MC-FRONT-754x1024.jpg'
     def a(section, label):
         cls = ' class="active"' if active == section else ''
         return f'<li><a href="{prefix}{section}/index.html"{cls}>{label}</a></li>'
@@ -89,8 +90,11 @@ def nav_html(depth, active):
 </div>
 <nav class="main-nav">
   <a class="nav-brand-wrap" href="/">
-    <div class="nav-mark"><div class="nav-mark-inner"></div></div>
-    <div><div class="nav-name">Moqua Foundation</div><div class="nav-sub">Owasippe Lodge #7 · Since 1921</div></div>
+    <img class="nav-logo-img" src="{logo_src}" alt="Moqua Foundation" onerror="this.style.display='none'" />
+    <div>
+      <div class="nav-name">Moqua Foundation</div>
+      <div class="nav-tagline">Preserving the traditions.</div>
+    </div>
   </a>
   <button class="nav-toggle" aria-label="Open menu"><span></span><span></span><span></span></button>
   <ul class="nav-links">
@@ -98,8 +102,10 @@ def nav_html(depth, active):
     {a('biographies','Biographies')}
     {a('centurions','Centurions')}
     {a('events','Events')}
+    {a('committee','Committee')}
     {a('guest-lodge','Guest Lodge')}
     {a('contact','Contact')}
+    <li><a class="nav-register-btn" href="{prefix}register/index.html">Register →</a></li>
   </ul>
 </nav>"""
 
@@ -165,12 +171,23 @@ def build_bio_pages():
         <div style="font-family:'Roboto Condensed',sans-serif;font-size:9px;color:rgba(0,0,0,.4);padding:4px 2px;font-style:italic">{esc(im.get('caption',''))}</div>
       </div>"""
 
-        born_line = f'<div class="pmi"><div class="pmi-label">Born</div><div class="pmi-val">{esc(born)}</div></div>' if born else (f'<div class="pmi"><div class="pmi-label">Inducted</div><div class="pmi-val">{esc(vigil_date)}</div></div>' if vigil_date else '')
+        born_line = f'<div class="pmi"><div class="pmi-label">Born</div><div class="pmi-val">{esc(born)}</div></div>' if born else ''
         died_line = f'<div class="sidebar-fact"><div class="sf-key">Died</div><div class="sf-val">{esc(died)}</div></div>' if died else ''
         vigil_s_line = f'<div class="sidebar-fact"><div class="sf-key">Vigil name</div><div class="sf-val">{esc(vigil_name)}</div></div>' if vigil_name else ''
         trans_line = f'<div class="sidebar-fact"><div class="sf-key">Meaning</div><div class="sf-val">"{esc(vigil_trans)}"</div></div>' if vigil_trans else ''
         vigil_date_line = f'<div class="sidebar-fact"><div class="sf-key">Vigil induction</div><div class="sf-val">{esc(vigil_date)}</div></div>' if vigil_date else ''
         trans_display = f'<div class="vigil-trans">"{esc(vigil_trans)}"</div>' if vigil_trans else ''
+        # FIX #9: show graceful default when no vigil name
+        if vigil_name:
+            vigil_display_name = f'<div class="vigil-name">{esc(vigil_name)}</div>'
+        else:
+            vigil_display_name = (
+                '<div class="vigil-unknown">Vigil name not yet recorded.</div>'
+                '<div class="vigil-trans">Do you know it? '
+                '<a href="/contact/index.html" style="color:rgba(255,255,255,.6);text-decoration:underline;">'
+                'Help us complete this record →</a></div>'
+            )
+            trans_display = ''  # suppress redundant translation line
         born_sidebar = f'<div class="sidebar-fact"><div class="sf-key">Born</div><div class="sf-val">{esc(born)}</div></div>' if born else ''
 
         page = f"""{head_html(bio['name'], f"Biography of {bio['name']}, Vigil Honor member of Owasippe Lodge #7.", 2)}
@@ -194,14 +211,14 @@ def build_bio_pages():
     <div class="vigil-wrap">
       <div class="vigil-badge"><span class="vigil-badge-text">Vigil Name</span></div>
       <div>
-        <div class="vigil-name">{esc(vigil_name or 'Vigil Honor')}</div>
+        {vigil_display_name}
         {trans_display}
       </div>
     </div>
     <div class="profile-meta-grid">
       {born_line}
+      <div class="pmi"><div class="pmi-label">Inducted</div><div class="pmi-val">{esc(vigil_date) if vigil_date else 'Owasippe Lodge'}</div></div>
       <div class="pmi"><div class="pmi-label">Honored</div><div class="pmi-val">{esc(dinner_year)} Dinner</div></div>
-      <div class="pmi"><div class="pmi-label">Lodge</div><div class="pmi-val">Owasippe #7</div></div>
     </div>
   </div>
 </div>

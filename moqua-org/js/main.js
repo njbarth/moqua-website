@@ -1,6 +1,6 @@
 /* ============================================================
    MOQUA FOUNDATION — MAIN.JS
-   Navigation, filter interactions, and utilities
+   Navigation, filter interactions, carousel, and utilities
    ============================================================ */
 
 (function () {
@@ -19,6 +19,53 @@
         navLinks.classList.remove('open');
       });
     });
+  }
+
+  // ---- Hero Carousel ----
+  var carouselEl = document.getElementById('carousel-slides');
+  if (carouselEl) {
+    var dots    = Array.from(document.querySelectorAll('.carousel-dot'));
+    var caption = document.getElementById('carousel-caption');
+    var captions = [];
+    // Read captions from data-caption on each slide
+    Array.from(carouselEl.querySelectorAll('.carousel-slide')).forEach(function (sl) {
+      captions.push(sl.dataset.caption || '');
+    });
+    var totalSlides = captions.length;
+    var currentSlide = 0;
+    var carouselTimer = null;
+
+    function goTo(i) {
+      currentSlide = (i + totalSlides) % totalSlides;
+      carouselEl.style.transform = 'translateX(-' + (currentSlide * 100) + '%)';
+      dots.forEach(function (d, j) {
+        d.classList.toggle('active', j === currentSlide);
+      });
+      if (caption) caption.textContent = captions[currentSlide] || '';
+    }
+
+    function next() { goTo(currentSlide + 1); }
+    function prev() { goTo(currentSlide - 1); }
+
+    function startAuto() {
+      stopAuto();
+      carouselTimer = setInterval(next, 5000);
+    }
+    function stopAuto() {
+      if (carouselTimer) { clearInterval(carouselTimer); carouselTimer = null; }
+    }
+
+    // Expose for inline onclick
+    window.carouselNext = function () { next(); startAuto(); };
+    window.carouselPrev = function () { prev(); startAuto(); };
+    window.carouselGo   = function (i) { goTo(i); startAuto(); };
+
+    // Pause on hover
+    carouselEl.addEventListener('mouseenter', stopAuto);
+    carouselEl.addEventListener('mouseleave', startAuto);
+
+    goTo(0);
+    startAuto();
   }
 
   // ---- Bio / Centurion grid filter ----

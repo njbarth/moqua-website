@@ -20,10 +20,10 @@
 <!-- Main Navigation -->
 <nav class="main-nav">
   <a class="nav-brand-wrap" href="/">
-    <div class="nav-mark"><div class="nav-mark-inner"></div></div>
+    <img class="nav-logo-img" src="images/awards/C-100919-BSA-OA-Centurion-Medal-v2-Texas-MC-FRONT-754x1024.jpg" alt="Moqua Foundation" onerror="this.style.display='none'" />
     <div>
       <div class="nav-name">Moqua Foundation</div>
-      <div class="nav-sub">Owasippe Lodge #7 · Since 1921</div>
+      <div class="nav-tagline">Preserving the traditions.</div>
     </div>
   </a>
   <button class="nav-toggle" aria-label="Open menu">
@@ -34,14 +34,36 @@
     <li><a href="biographies/index.html">Biographies</a></li>
     <li><a href="centurions/index.html">Centurions</a></li>
     <li><a href="events/index.html">Events</a></li>
+    <li><a href="committee/index.html">Committee</a></li>
     <li><a href="guest-lodge/index.html">Guest Lodge</a></li>
     <li><a href="contact/index.html">Contact</a></li>
+    <li><a class="nav-register-btn" href="register/index.html">Register →</a></li>
   </ul>
 </nav>
 
-<!-- Hero -->
-<section class="hero">
-  <div>
+<!-- Hero Carousel -->
+<section class="hero" id="home-hero">
+  <div class="carousel-slides" id="carousel-slides">
+    <div class="carousel-slide" data-caption="2019 Vigil Alumni Annual Dinner">
+      <img src="images/events/Vigil-Dinner-Group-11-23-2019-carousel-1480x604.jpg"
+           alt="2019 Vigil Alumni Annual Dinner" />
+    </div>
+    <div class="carousel-slide" data-caption="Past Chiefs of Owasippe Lodge #7 — 2018">
+      <img src="images/events/Owasippe-Lodge-7-Chiefs-11-17-2018-carousel-1480x604.jpg"
+           alt="Lodge Chiefs 2018" />
+    </div>
+    <div class="carousel-slide" data-caption="Rev. F. Gerald Scanlan — 2019 Honoree">
+      <img src="images/events/Scanlan-Carousel-Picture-1480x604.jpg"
+           alt="Rev. F. Gerald Scanlan 2019" />
+    </div>
+    <div class="carousel-slide" data-caption="Ronald J. Temple, Ph.D. — 2019 Honoree">
+      <img src="images/events/Temple-Carousel-Photo-1480x604.jpg"
+           alt="Ronald J. Temple 2019" />
+    </div>
+  </div>
+
+  <!-- Hero content overlay -->
+  <div class="hero-content">
     <div class="hero-tag">
       <div class="hero-tag-dot"></div>
       <span class="hero-tag-text">Vigil Honor · Est. 1921 · Chicago Area Council</span>
@@ -53,13 +75,18 @@
       <a class="btn-ghost" href="about/vigil-honor/index.html">About the Vigil Honor</a>
     </div>
   </div>
-  <div class="hero-photos">
-    <img class="hero-photo-main"
-         src="images/events/Vigil-Dinner-Group-11-23-2019-carousel-1480x604.jpg"
-         alt="2019 Vigil Dinner — Owasippe Lodge #7" />
-    <img class="hero-photo-sec"
-         src="images/events/Owasippe-Lodge-7-Chiefs-11-17-2018-carousel-1480x604.jpg"
-         alt="Past Chiefs of Owasippe Lodge #7, 2018" />
+
+  <!-- Caption -->
+  <div class="carousel-caption" id="carousel-caption">2019 Vigil Alumni Annual Dinner</div>
+
+  <!-- Controls -->
+  <div class="carousel-controls">
+    <button class="carousel-arrow" onclick="carouselPrev()" aria-label="Previous slide">&#8249;</button>
+    <button class="carousel-dot active" onclick="carouselGo(0)" aria-label="Slide 1"></button>
+    <button class="carousel-dot" onclick="carouselGo(1)" aria-label="Slide 2"></button>
+    <button class="carousel-dot" onclick="carouselGo(2)" aria-label="Slide 3"></button>
+    <button class="carousel-dot" onclick="carouselGo(3)" aria-label="Slide 4"></button>
+    <button class="carousel-arrow" onclick="carouselNext()" aria-label="Next slide">&#8250;</button>
   </div>
 </section>
 
@@ -69,6 +96,21 @@
   <div class="stat-item"><span class="stat-n">100+</span><span class="stat-l">Years of service</span></div>
   <div class="stat-item"><span class="stat-n">31</span><span class="stat-l">Honored members</span></div>
   <div class="stat-item"><span class="stat-n">10+</span><span class="stat-l">Annual dinners</span></div>
+</div>
+
+<!-- Dinner Announcement Banner -->
+<div class="dinner-announcement">
+  <div class="da-left">
+    <div class="da-badge"><span class="da-badge-text">Now Open</span></div>
+    <div>
+      <div class="da-headline">2025 Vigil Alumni Annual Dinner</div>
+      <div class="da-sub">Saturday, November 22, 2025 · The Mayor's Mansion · Chicago · $45 per person</div>
+    </div>
+  </div>
+  <div class="da-right">
+    <a class="da-learn-more" href="events/index.html">Event details</a>
+    <a class="da-register-btn" href="register/index.html">Register Now →</a>
+  </div>
 </div>
 
 <!-- Recent Honorees -->
