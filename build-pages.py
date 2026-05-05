@@ -90,7 +90,7 @@ def nav_html(depth, active):
 </div>
 <nav class="main-nav">
   <a class="nav-brand-wrap" href="/">
-    <img class="nav-logo-img" src="{logo_src}" alt="Moqua Foundation" onerror="this.style.display='none'" />
+    <img class="nav-logo-img" src="{logo_src}" alt="Moqua Foundation" width="40" height="40" onerror="this.style.display='none'" />
     <div>
       <div class="nav-name">Moqua Foundation</div>
       <div class="nav-tagline">Preserving the traditions.</div>
@@ -126,7 +126,7 @@ def head_html(title, desc, depth):
 <meta name="description" content="{esc(desc)}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;700&family=Roboto+Condensed:ital,wght@0,400;0,700;1,400&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{prefix}css/main.css">
+<link rel="stylesheet" href="{prefix}css/main.css?v=2">
 </head>
 <body>"""
 
