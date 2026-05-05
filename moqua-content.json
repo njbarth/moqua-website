@@ -528,6 +528,50 @@
   },
   "events": [
     {
+      "year": 2025,
+      "date": "November 22, 2025",
+      "venue": "European Chalet Banquet Hall",
+      "address": "5445 S. Harlem Avenue, Chicago, Illinois",
+      "cost": "$40.00 per person",
+      "schedule": "Fellowship 5:30–7:00 PM | Dinner 7:00–8:00 PM | Program 8:00–9:15 PM",
+      "honorees": [],
+      "photos_hosted": "external",
+      "photos_url": "https://www.nickbarthphotography.com/Vigil-Dinners/n-JpNDmS/2025-11-22-Vigil-Dinner"
+    },
+    {
+      "year": 2024,
+      "date": "November 23, 2024",
+      "venue": "European Chalet Banquet Hall",
+      "address": "5445 S. Harlem Avenue, Chicago, Illinois",
+      "cost": "$40.00 per person",
+      "schedule": "Fellowship 5:30–7:00 PM | Dinner 7:00–8:00 PM | Program 8:00–9:15 PM",
+      "honorees": [],
+      "photos_hosted": "external",
+      "photos_url": "https://www.nickbarthphotography.com/Vigil-Dinners/n-JpNDmS/2024-11-23-Vigil-Dinner"
+    },
+    {
+      "year": 2023,
+      "date": "November 18, 2023",
+      "venue": "European Chalet Banquet Hall",
+      "address": "5445 S. Harlem Avenue, Chicago, Illinois",
+      "cost": "$40.00 per person",
+      "schedule": "Fellowship 5:30–7:00 PM | Dinner 7:00–8:00 PM | Program 8:00–9:15 PM",
+      "honorees": [],
+      "photos_hosted": "external",
+      "photos_url": "https://www.nickbarthphotography.com/Vigil-Dinners/n-JpNDmS/2023-11-18-Vigil-Dinner"
+    },
+    {
+      "year": 2022,
+      "date": "November 19, 2022",
+      "venue": "European Chalet Banquet Hall",
+      "address": "5445 S. Harlem Avenue, Chicago, Illinois",
+      "cost": "$40.00 per person",
+      "schedule": "Fellowship 5:30–7:00 PM | Dinner 7:00–8:00 PM | Program 8:00–9:15 PM",
+      "honorees": [],
+      "photos_hosted": "external",
+      "photos_url": "https://www.nickbarthphotography.com/Vigil-Dinners/n-JpNDmS/2022-11-19-Vigil-Dinner"
+    },
+    {
       "year": 2020,
       "slug": "event/2020-vigil-dinner",
       "date": "November 21, 2020",
@@ -559,7 +603,7 @@
       ],
       "photos_slug": "2019-vigil-dinner-pictures",
       "photos_hosted": "external",
-      "photos_url": "https://www.nickbarthphotography.com/Vigil-Dinners/n-JpNDmS/2019-11-23-Vigil-Dinner/",
+      "photos_url": "https://www.nickbarthphotography.com/Vigil-Dinners/n-JpNDmS/2019-11-23-Vigil-Dinner",
       "carousel_images": [
         "images/events/Vigil-Dinner-Group-11-23-2019-carousel-1480x604.jpg",
         "images/events/Temple-Carousel-Photo-1480x604.jpg",
@@ -581,7 +625,7 @@
       ],
       "photos_slug": "2018-vigil-dinner-pictures",
       "photos_hosted": "external",
-      "photos_url": "https://www.nickbarthphotography.com/Vigil-Dinners/n-JpNDmS/2018-11-17-Vigil-Dinner/",
+      "photos_url": "https://www.nickbarthphotography.com/Vigil-Dinners/n-JpNDmS/2018-11-17-Vigil-Dinner",
       "video_url": "https://youtu.be/Fj53E2ygB9k",
       "carousel_images": [
         "images/events/Muraski-carousel-picture-1480x604.jpg",

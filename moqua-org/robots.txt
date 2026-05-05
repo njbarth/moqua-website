@@ -1,0 +1,4 @@
+# robots.txt — Moqua Foundation
+# Development environment — do not index
+User-agent: *
+Disallow: /

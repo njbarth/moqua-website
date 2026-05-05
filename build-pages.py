@@ -444,9 +444,14 @@ def build_event_pages():
         else:
             photos_link = f'<a class="view-photos-btn" href="gallery/index.html">View photo gallery →</a>'
             photo_credit = '<!-- TODO: Add photo credit -->'
-        last_names = ' · '.join(n.split(' ')[-1] for n in ev['honorees'])
+        honoree_names = ev['honorees']
+        last_names = ' · '.join(n.split(' ')[-1] for n in honoree_names) if honoree_names else 'TBD'
+        honoree_count = f'{len(honoree_names)} members' if honoree_names else 'TBD'
+        honoree_desc = ' and '.join(honoree_names) if honoree_names else 'honorees to be announced'
+        if not honoree_cards_html:
+            honoree_cards_html = '<p style="color:var(--gray-lt);font-style:italic;font-size:15px;padding:8px 0">Honoree information for this year has not yet been added to the archive.</p>'
 
-        page = f"""{head_html(f"{year} Vigil Alumni Annual Dinner", f"The {year} Vigil Alumni Annual Dinner — Owasippe Lodge #7, honoring {' and '.join(ev['honorees'])}.", 2)}
+        page = f"""{head_html(f"{year} Vigil Alumni Annual Dinner", f"The {year} Vigil Alumni Annual Dinner — Owasippe Lodge #7, {honoree_desc}.", 2)}
 {nav_html(2, 'events')}
 
 <div class="event-hero">
@@ -484,7 +489,7 @@ def build_event_pages():
   </div>
   <div class="emi">
     <div class="emi-label">Honorees</div>
-    <div class="emi-val">{len(ev['honorees'])} members</div>
+    <div class="emi-val">{esc(honoree_count)}</div>
     <div class="emi-sub">{esc(last_names)}</div>
   </div>
 </div>
