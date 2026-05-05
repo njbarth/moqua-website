@@ -177,7 +177,7 @@ def build_bio_pages():
       <div style="margin-top:16px">
         <img src="{local_img(im.get('url',''), 2)}" alt="{esc(im.get('caption', bio['name']))}"
              style="width:100%;border-radius:3px;border:1px solid var(--border)" />
-        <div style="font-family:'Roboto Condensed',sans-serif;font-size:9px;color:rgba(0,0,0,.4);padding:4px 2px;font-style:italic">{esc(im.get('caption',''))}</div>
+        <div class="extra-photo-caption">{esc(im.get('caption',''))}</div>
       </div>"""
 
         born_line = f'<div class="pmi"><div class="pmi-label">Born</div><div class="pmi-val">{esc(born)}</div></div>' if born else ''
@@ -294,7 +294,7 @@ def build_centurion_pages():
         vigil_trans = cent.get('vigil_translation', '')
         born  = cent.get('born', '')
 
-        img_block = f'<img class="profile-photo" src="{local_img(img, 2)}" alt="{esc(cent["name"])}" onerror="this.style.background=\'#D4E2F4\';this.removeAttribute(\'src\')" />' if img else '<div class="profile-photo" style="display:flex;align-items:center;justify-content:center;"><span style="font-family:\'Roboto Condensed\',sans-serif;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.4)">Photo TBD</span></div>'
+        img_block = f'<img class="profile-photo" src="{local_img(img, 2)}" alt="{esc(cent["name"])}" onerror="this.style.background=\'#D4E2F4\';this.removeAttribute(\'src\')" />' if img else '<div class="profile-photo profile-photo-placeholder"><span class="profile-photo-tbd">Photo TBD</span></div>'
         trans_display = f'<div class="vigil-trans">"{esc(vigil_trans)}"</div>' if vigil_trans else ''
         lodge_role = cent.get('lodge_role', '')
         born_line = f'<div class="pmi"><div class="pmi-label">Born</div><div class="pmi-val">{esc(born)}</div></div>' if born else (f'<div class="pmi"><div class="pmi-label">Role</div><div class="pmi-val">{esc(lodge_role)}</div></div>' if lodge_role else '')
@@ -307,7 +307,7 @@ def build_centurion_pages():
             ci = ci_list[0]['url'] if ci_list else ''
             if ci:
                 return f'<img src="{local_img(ci, 2)}" alt="{esc(c["name"])}" onerror="this.style.background=\'var(--blue-lt)\';this.removeAttribute(\'src\')" />'
-            return '<div style="width:42px;height:50px;background:var(--blue-lt);border-radius:2px;flex-shrink:0;display:flex;align-items:center;justify-content:center;"><span style="font-family:\'Roboto Condensed\',sans-serif;font-size:8px;font-weight:700;text-transform:uppercase;color:var(--gray-lt)">#7</span></div>'
+            return '<div class="snc-thumb-placeholder"><span>#7</span></div>'
 
         page = f"""{head_html(cent['name'], f"{cent['name']} — Centurion Award honoree, Owasippe Lodge #7.", 2)}
 {nav_html(2, 'centurions')}
@@ -398,11 +398,17 @@ def build_event_pages():
         honoree_cards_html = ''
         for name in ev['honorees']:
             b = bio_lookup.get(name)
+            # Build initials placeholder (used when no image available)
+            parts = name.strip().split()
+            initials = (parts[0][0] + parts[-1][0]).upper() if len(parts) >= 2 else parts[0][0].upper()
+            initials_div = f'<div class="hf-img hf-img-placeholder"><span class="hf-initials">{esc(initials)}</span></div>'
+
             if b:
                 bimg = b.get('images',[{}])[0].get('url','') if b.get('images') else ''
+                photo_html = f'<img class="hf-img" src="{local_img(bimg, 2)}" alt="{esc(b["name"])}" onerror="this.style.background=\'var(--blue-lt)\';this.removeAttribute(\'src\')" />' if bimg else initials_div
                 honoree_cards_html += f"""
         <a class="hf-card" href="../../biographies/{b['slug']}/index.html">
-          <img class="hf-img" src="{local_img(bimg, 2)}" alt="{esc(b['name'])}" onerror="this.style.background='var(--blue-lt)';this.removeAttribute('src')" />
+          {photo_html}
           <div class="hf-body">
             <div class="hf-yr">{esc(year)} Honoree</div>
             <div class="hf-name">{esc(b['name'])}</div>
@@ -411,14 +417,9 @@ def build_event_pages():
           </div>
         </a>"""
             else:
-                # Build initials from first + last word of name
-                parts = name.strip().split()
-                initials = (parts[0][0] + parts[-1][0]).upper() if len(parts) >= 2 else parts[0][0].upper()
                 honoree_cards_html += f"""
         <div class="hf-card">
-          <div class="hf-img" style="background:var(--blue);display:flex;align-items:center;justify-content:center;width:110px;height:140px;flex-shrink:0;">
-            <span style="font-family:'Roboto Slab',serif;font-size:28px;font-weight:700;color:rgba(255,255,255,.4)">{esc(initials)}</span>
-          </div>
+          {initials_div}
           <div class="hf-body">
             <div class="hf-yr">{esc(year)} Honoree</div>
             <div class="hf-name">{esc(name)}</div>
