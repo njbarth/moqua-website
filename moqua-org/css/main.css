@@ -343,6 +343,9 @@ button, input, select, textarea { font-family: inherit; }
 .with-sidebar {
   display: grid;
   grid-template-columns: 1fr 300px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
 }
 .sidebar {
   padding: 36px 28px;
@@ -972,16 +975,18 @@ button, input, select, textarea { font-family: inherit; }
 }
 .profile-body-area {
   display: grid;
-  grid-template-columns: 1fr 280px;
+  grid-template-columns: 1fr 300px;
   border-top: 1px solid var(--border);
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
 }
-.profile-content { padding: 40px 40px 52px 36px; }
+.profile-content { padding: 40px 48px 52px 36px; }
 .bio-text {
   font-size: 14px;
   font-weight: 300;
   color: var(--gray);
   line-height: 1.9;
-  max-width: 580px;
 }
 .bio-text p { margin-bottom: 14px; }
 .profile-sidebar {

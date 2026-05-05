@@ -10,6 +10,64 @@ import json, os, html as html_mod
 ROOT    = os.path.join(os.path.dirname(__file__), 'moqua-org')
 CONTENT = json.load(open(os.path.join(os.path.dirname(__file__), 'moqua-content.json'), encoding='utf-8'))
 
+# Map original WordPress filenames to local subfolder
+_IMG_CATEGORY = {
+    "portraits": [
+        "20101120VigilDinner181-Brems1-1024x768.jpg","20101120VigilDinner181-Brems1.jpg",
+        "Arn-Schenk-circa-1936.jpg","Frederick-C.-Brems-1940-Camp-Twin-Echos-Ligonier-PA-09-01-1940-profile-revised-137x300.jpg",
+        "Frederick-C.-Brems-1940-Camp-Twin-Echos-Ligonier-PA-09-01-1940-profile-revised.jpg",
+        "Lawrence-S.-Branch-11-20-20101.jpg","Lawrence-S.-Branch-1936.jpg",
+        "Norman-C.-Buettner-1965-300x200.jpg","Norman-C.-Buettner-2001-250x300.jpg",
+        "Robert-H.-Krejci-FJP-10-08-2011-300x200.jpg","Robert-H.-Krejci-FJP-10-08-2011.jpg",
+        "young-mr-cook-modified-230x300.jpg","young-mr-cook-modified.jpg",
+        "Sheridan-U.-Nunn-August-1972-NOAC-700x1024.jpg","Sheridan-U.-Nunn-August-1972-NOAC.jpg",
+        "Stanton-Miller-1939.jpg","Daniel-J.-Reilly-1938-revised.jpg",
+        "Jack-B.-Blane-circa-1938-revised-257x300.jpg","Jack-B.-Blane-circa-1938-revised.jpg",
+        "Jack-Blane-2010-787x1024.jpg","Jack-Blane-2010.jpg",
+        "Bob-Burns-portrait-circa-1940.jpg","Phillips-circa-1940.jpg",
+        "Donald-Studaven-05-1982.jpg","Dwaine-Filkins-1940-Twin-Echos-cropped-revised.jpg",
+        "John-Sanchez-circa-2003a.jpg","Frank-Collins-circa-1955-819x1024.jpg","Frank-Collins-circa-1955.jpg",
+        "John-M-Kaserow-1955-819x1024.jpg","John-M-Kaserow-1955.jpg",
+        "Bob-Landmichl-3-x-5-614x1024.jpg","Bob-Landmichl-3-x-5.jpg",
+        "FJP-3-x-5-1978.jpg","Gerry-Blake-3-x-5-revised.jpg",
+        "John-Kosik-3-x-5-615x1024.jpg","John-Kosik-3-x-5.jpg",
+        "Ron-Temple-3-x-5-615x1024.jpg","Ron-Temple-3-x-5.jpg",
+        "Ted-Kumzi-3-x-5-615x1024.jpg","Ted-Kumzi-3-x-5.jpg",
+        "Frank-Accardi-1965-202x300.jpg","Frank-Accardi-1965.jpg","Frank-Accardi-2010-216x300.jpg",
+        "John-Brown-High-School-1952-262x300.jpg","John-Brown-circa-1971-227x300.jpg",
+        "Norville-Carter-circa-1954-247x300.jpg","Jim-Heinlein-youth-270x300.jpg",
+        "Bob-Sublette-as-a-youth-240x300.jpg","Grant-Muraski-as-a-youth-240x300.jpg",
+        "Fr-Jerry-Scanlan-HS-Graduation-Photo-1954.jpg","Ron-Temple-with-Edson-and-Goodman-1960-816x1024.jpg",
+    ],
+    "events": [
+        "Blane-award-11-17-2012.jpg","Muraski-carousel-picture-1480x604.jpg",
+        "Owasippe-Lodge-7-Chiefs-11-17-2018-carousel-1480x604.jpg","Sublette-carousel-picture-1480x604.jpg",
+        "Scanlan-Carousel-Picture-1480x604.jpg","Temple-Carousel-Photo-1480x604.jpg",
+        "Vigil-Dinner-Group-11-23-2019-carousel-1480x604.jpg",
+    ],
+    "lodge": [
+        "Camp-Belnap-1934-revised-1024x816.jpg","Camp-Belnap-1934-revised.jpg",
+        "NOAC-Contingent-09-1969-edited-300x192.jpg","Guest-Lodge-Postcard-inverted.jpg",
+        "photo-1.jpg","photo-6.jpg","New-Banner.jpg",
+    ],
+    "awards": [
+        "C-100919-BSA-OA-Centurion-Medal-v2-Texas-MC-FRONT-754x1024.jpg",
+    ],
+}
+_FNAME_TO_CAT = {fname: cat for cat, fnames in _IMG_CATEGORY.items() for fname in fnames}
+
+def local_img(url, depth):
+    """Convert a WordPress upload URL to a local relative path at the given page depth."""
+    if not url:
+        return ''
+    fname = url.split('/')[-1]
+    if fname.endswith('.pdf'):
+        prefix = '../' * depth
+        return prefix + 'pdfs/' + fname
+    cat = _FNAME_TO_CAT.get(fname, 'portraits')
+    prefix = '../' * depth
+    return prefix + f'images/{cat}/{fname}'
+
 
 def esc(s):
     return html_mod.escape(str(s)) if s else ''
@@ -30,7 +88,7 @@ def nav_html(depth, active):
   <span class="oa-text">Order of the Arrow · Owasippe Lodge #7 · Chicago Area Council · BSA</span>
 </div>
 <nav class="main-nav">
-  <a class="nav-brand-wrap" href="{prefix}index.html">
+  <a class="nav-brand-wrap" href="/">
     <div class="nav-mark"><div class="nav-mark-inner"></div></div>
     <div><div class="nav-name">Moqua Foundation</div><div class="nav-sub">Owasippe Lodge #7 · Since 1921</div></div>
   </a>
@@ -102,12 +160,12 @@ def build_bio_pages():
         for im in images[1:]:
             extra_photos_html += f"""
       <div style="margin-top:16px">
-        <img src="{esc(im.get('url',''))}" alt="{esc(im.get('caption', bio['name']))}"
+        <img src="{local_img(im.get('url',''), 2)}" alt="{esc(im.get('caption', bio['name']))}"
              style="width:100%;border-radius:3px;border:1px solid var(--border)" />
         <div style="font-family:'Roboto Condensed',sans-serif;font-size:9px;color:rgba(0,0,0,.4);padding:4px 2px;font-style:italic">{esc(im.get('caption',''))}</div>
       </div>"""
 
-        born_line = f'<div class="pmi"><div class="pmi-label">Born</div><div class="pmi-val">{esc(born)}</div></div>' if born else '<div class="pmi"><div class="pmi-label">Lodge</div><div class="pmi-val">Owasippe #7</div></div>'
+        born_line = f'<div class="pmi"><div class="pmi-label">Born</div><div class="pmi-val">{esc(born)}</div></div>' if born else (f'<div class="pmi"><div class="pmi-label">Inducted</div><div class="pmi-val">{esc(vigil_date)}</div></div>' if vigil_date else '')
         died_line = f'<div class="sidebar-fact"><div class="sf-key">Died</div><div class="sf-val">{esc(died)}</div></div>' if died else ''
         vigil_s_line = f'<div class="sidebar-fact"><div class="sf-key">Vigil name</div><div class="sf-val">{esc(vigil_name)}</div></div>' if vigil_name else ''
         trans_line = f'<div class="sidebar-fact"><div class="sf-key">Meaning</div><div class="sf-val">"{esc(vigil_trans)}"</div></div>' if vigil_trans else ''
@@ -121,14 +179,14 @@ def build_bio_pages():
 <div class="profile-hero">
   <div class="profile-photo-col">
     <img class="profile-photo"
-         src="{esc(img)}"
+         src="{local_img(img, 2)}"
          alt="{esc(bio['name'])}"
          onerror="this.style.background='#D4E2F4';this.removeAttribute('src')" />
     <div class="profile-photo-caption">{esc(img_cap)}</div>
   </div>
   <div class="profile-info-col">
     <div class="profile-bc">
-      <a href="../../index.html">Home</a> ·
+      <a href="/">Home</a> ·
       <a href="../index.html">Biographies</a> ·
       <span>{esc(bio['name'])}</span>
     </div>
@@ -170,11 +228,11 @@ def build_bio_pages():
     <div style="margin-top:24px">
       <div class="sidebar-label" style="margin-bottom:10px">Other honorees</div>
       <a class="sidebar-next-card" href="../{prev_bio['slug']}/index.html">
-        <img src="{esc(prev_img)}" alt="{esc(prev_bio['name'])}" onerror="this.style.background='var(--blue-lt)';this.removeAttribute('src')" />
+        <img src="{local_img(prev_img, 2)}" alt="{esc(prev_bio['name'])}" onerror="this.style.background='var(--blue-lt)';this.removeAttribute('src')" />
         <div><div class="snc-label">← Previous</div><div class="snc-name">{esc(prev_bio['name'])}</div></div>
       </a>
       <a class="sidebar-next-card" href="../{next_bio['slug']}/index.html">
-        <img src="{esc(next_img)}" alt="{esc(next_bio['name'])}" onerror="this.style.background='var(--blue-lt)';this.removeAttribute('src')" />
+        <img src="{local_img(next_img, 2)}" alt="{esc(next_bio['name'])}" onerror="this.style.background='var(--blue-lt)';this.removeAttribute('src')" />
         <div><div class="snc-label">Next →</div><div class="snc-name">{esc(next_bio['name'])}</div></div>
       </a>
     </div>
@@ -210,17 +268,19 @@ def build_centurion_pages():
         vigil_trans = cent.get('vigil_translation', '')
         born  = cent.get('born', '')
 
-        img_block = f'<img class="profile-photo" src="{esc(img)}" alt="{esc(cent["name"])}" onerror="this.style.background=\'#D4E2F4\';this.removeAttribute(\'src\')" />' if img else '<div class="profile-photo" style="display:flex;align-items:center;justify-content:center;"><span style="font-family:\'Roboto Condensed\',sans-serif;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.4)">Photo TBD</span></div>'
+        img_block = f'<img class="profile-photo" src="{local_img(img, 2)}" alt="{esc(cent["name"])}" onerror="this.style.background=\'#D4E2F4\';this.removeAttribute(\'src\')" />' if img else '<div class="profile-photo" style="display:flex;align-items:center;justify-content:center;"><span style="font-family:\'Roboto Condensed\',sans-serif;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.4)">Photo TBD</span></div>'
         trans_display = f'<div class="vigil-trans">"{esc(vigil_trans)}"</div>' if vigil_trans else ''
-        born_line = f'<div class="pmi"><div class="pmi-label">Born</div><div class="pmi-val">{esc(born)}</div></div>' if born else '<div class="pmi"><div class="pmi-label">Lodge</div><div class="pmi-val">Owasippe #7</div></div>'
+        lodge_role = cent.get('lodge_role', '')
+        born_line = f'<div class="pmi"><div class="pmi-label">Born</div><div class="pmi-val">{esc(born)}</div></div>' if born else (f'<div class="pmi"><div class="pmi-label">Role</div><div class="pmi-val">{esc(lodge_role)}</div></div>' if lodge_role else '')
         born_sidebar = f'<div class="sidebar-fact"><div class="sf-key">Born</div><div class="sf-val">{esc(born)}</div></div>' if born else ''
         vigil_s = f'<div class="sidebar-fact"><div class="sf-key">Vigil name</div><div class="sf-val">{esc(vigil_name)}</div></div>' if vigil_name else ''
         trans_s = f'<div class="sidebar-fact"><div class="sf-key">Meaning</div><div class="sf-val">"{esc(vigil_trans)}"</div></div>' if vigil_trans else ''
 
         def prev_next_thumb(c):
-            ci = c.get('img','')
+            ci_list = c.get('images', [])
+            ci = ci_list[0]['url'] if ci_list else ''
             if ci:
-                return f'<img src="{esc(ci)}" alt="{esc(c["name"])}" onerror="this.style.background=\'var(--blue-lt)\';this.removeAttribute(\'src\')" />'
+                return f'<img src="{local_img(ci, 2)}" alt="{esc(c["name"])}" onerror="this.style.background=\'var(--blue-lt)\';this.removeAttribute(\'src\')" />'
             return '<div style="width:42px;height:50px;background:var(--blue-lt);border-radius:2px;flex-shrink:0;display:flex;align-items:center;justify-content:center;"><span style="font-family:\'Roboto Condensed\',sans-serif;font-size:8px;font-weight:700;text-transform:uppercase;color:var(--gray-lt)">#7</span></div>'
 
         page = f"""{head_html(cent['name'], f"{cent['name']} — Centurion Award honoree, Owasippe Lodge #7.", 2)}
@@ -233,7 +293,7 @@ def build_centurion_pages():
   </div>
   <div class="profile-info-col">
     <div class="profile-bc">
-      <a href="../../index.html">Home</a> ·
+      <a href="/">Home</a> ·
       <a href="../index.html">Centurions</a> ·
       <span>{esc(cent['name'])}</span>
     </div>
@@ -316,7 +376,7 @@ def build_event_pages():
                 bimg = b.get('images',[{}])[0].get('url','') if b.get('images') else ''
                 honoree_cards_html += f"""
         <a class="hf-card" href="../../biographies/{b['slug']}/index.html">
-          <img class="hf-img" src="{esc(bimg)}" alt="{esc(b['name'])}" onerror="this.style.background='var(--blue-lt)';this.removeAttribute('src')" />
+          <img class="hf-img" src="{local_img(bimg, 2)}" alt="{esc(b['name'])}" onerror="this.style.background='var(--blue-lt)';this.removeAttribute('src')" />
           <div class="hf-body">
             <div class="hf-yr">{esc(year)} Honoree</div>
             <div class="hf-name">{esc(b['name'])}</div>
@@ -353,12 +413,12 @@ def build_event_pages():
 {nav_html(2, 'events')}
 
 <div class="event-hero">
-  <img class="event-hero-img" src="{esc(ev.get('img',''))}" alt="{esc(year)} Vigil Alumni Dinner"
+  <img class="event-hero-img" src="{local_img(ev.get('img',''), 2)}" alt="{esc(year)} Vigil Alumni Dinner"
        onerror="this.style.background='var(--blue-dk)';this.removeAttribute('src')" />
   <div class="event-hero-overlay">
     <div>
       <div class="breadcrumb" style="color:rgba(255,255,255,.45);margin-bottom:8px">
-        <a href="../../index.html" style="color:rgba(255,255,255,.45)">Home</a> ·
+        <a href="/" style="color:rgba(255,255,255,.45)">Home</a> ·
         <a href="../index.html" style="color:rgba(255,255,255,.75)">Events</a> ·
         <span style="color:rgba(255,255,255,.75)">{esc(year)} Annual Dinner</span>
       </div>
@@ -471,7 +531,7 @@ def build_event_pages():
 
 <div class="page-header">
   <div class="breadcrumb">
-    <a href="../../../index.html">Home</a> ·
+    <a href="/">Home</a> ·
     <a href="../../index.html">Events</a> ·
     <a href="../index.html">{esc(year)} Dinner</a> ·
     <span>Gallery</span>
