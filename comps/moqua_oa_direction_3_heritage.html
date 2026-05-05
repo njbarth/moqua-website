@@ -1,0 +1,424 @@
+
+<!DOCTYPE html>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;700&family=Roboto+Condensed:ital,wght@0,400;0,700;1,400&family=Roboto:wght@300;400;500&display=swap');
+
+:root {
+  --bsa-blue: #003F87;
+  --bsa-blue-dk: #003366;
+  --bsa-blue-lt: #EEF3FA;
+  --bsa-red: #CE1126;
+  --bsa-red-lt: #FAE8EB;
+  --bsa-tan: #D6CEBD;
+  --bsa-tan-lt: #F0EDE7;
+  --bsa-gray: #515354;
+  --bsa-gray-lt: #858787;
+  --white: #ffffff;
+  --ink: #1a1917;
+  --border: rgba(0,0,0,.08);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Roboto', sans-serif; background: var(--white); color: var(--ink); font-size: 14px; line-height: 1.5; }
+
+.heritage-bar {
+  background: var(--white);
+  border-bottom: 3px solid var(--bsa-blue);
+  padding: 10px 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.heritage-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.heritage-oa-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--bsa-red);
+  padding: 4px 10px;
+  border-radius: 2px;
+}
+.heritage-oa-diamond {
+  width: 10px;
+  height: 10px;
+  background: var(--bsa-red);
+  transform: rotate(45deg);
+  flex-shrink: 0;
+}
+.heritage-oa-text {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--bsa-red);
+}
+.heritage-bar-right {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--bsa-blue);
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 36px;
+  height: 56px;
+  border-bottom: 1px solid var(--border);
+  background: var(--white);
+}
+.nav-left { display: flex; align-items: center; gap: 12px; }
+.nav-name { font-family: 'Roboto Slab', serif; font-size: 17px; font-weight: 700; color: var(--bsa-blue); }
+.nav-links { display: flex; gap: 2px; list-style: none; }
+.nav-links a {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--bsa-gray);
+  text-decoration: none;
+  padding: 5px 9px;
+  border-radius: 3px;
+}
+.nav-links a:hover { background: var(--bsa-blue-lt); color: var(--bsa-blue); }
+
+.hero {
+  background: var(--white);
+  padding: 56px 36px;
+  display: grid;
+  grid-template-columns: 1fr 460px;
+  gap: 56px;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+}
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.hero-eyebrow-line { width: 32px; height: 2px; background: var(--bsa-red); }
+.hero-eyebrow-text {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--bsa-red);
+}
+.hero-title {
+  font-family: 'Roboto Slab', serif;
+  font-size: 52px;
+  font-weight: 700;
+  line-height: 1.05;
+  color: var(--bsa-blue);
+  margin-bottom: 18px;
+}
+.hero-title em { font-style: italic; font-weight: 300; color: var(--bsa-gray); }
+.hero-body {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--bsa-gray);
+  margin-bottom: 28px;
+  max-width: 460px;
+}
+.hero-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+.btn-blue {
+  background: var(--bsa-blue);
+  color: var(--white);
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 11px 20px;
+  border-radius: 3px;
+  text-decoration: none;
+}
+.btn-red-outline {
+  border: 1px solid var(--bsa-red);
+  color: var(--bsa-red);
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 11px 20px;
+  border-radius: 3px;
+  text-decoration: none;
+}
+.hero-photo-stack { position: relative; height: 300px; }
+.hero-photo-main {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 340px;
+  height: 215px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+}
+.hero-photo-sec {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 195px;
+  height: 155px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+}
+.hero-oa-callout {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  background: var(--bsa-red);
+  padding: 10px 14px;
+  border-radius: 3px;
+  width: 130px;
+}
+.hero-oa-callout-label {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.7);
+  margin-bottom: 3px;
+}
+.hero-oa-callout-text {
+  font-family: 'Roboto Slab', serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.3;
+}
+
+.stat-bar {
+  background: var(--bsa-blue);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.stat-item {
+  padding: 18px 24px;
+  border-right: 1px solid rgba(255,255,255,.15);
+  text-align: center;
+}
+.stat-item:last-child { border-right: none; }
+.stat-n { font-family: 'Roboto Slab', serif; font-size: 26px; font-weight: 700; color: var(--white); display: block; }
+.stat-l { font-family: 'Roboto Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.5); display: block; margin-top: 4px; }
+
+.honorees-section { padding: 48px 36px; background: var(--bsa-tan-lt); border-bottom: 1px solid var(--border); }
+.sec-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px; }
+.sec-eyebrow { font-family: 'Roboto Condensed', sans-serif; font-size: 9px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--bsa-red); margin-bottom: 5px; }
+.sec-title { font-family: 'Roboto Slab', serif; font-size: 22px; font-weight: 700; color: var(--bsa-blue); }
+.see-all { font-family: 'Roboto Condensed', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--bsa-blue); text-decoration: none; }
+.hgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.hcard {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform .15s;
+}
+.hcard:hover { transform: translateY(-2px); }
+.hcard img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; }
+.hcard-body { padding: 11px 12px 13px; border-top: 2px solid var(--bsa-red); }
+.hcard-yr { font-family: 'Roboto Condensed', sans-serif; font-size: 9px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--bsa-red); margin-bottom: 5px; }
+.hcard-name { font-family: 'Roboto Slab', serif; font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.25; margin-bottom: 3px; }
+.hcard-sub { font-size: 11px; font-style: italic; color: var(--bsa-gray-lt); }
+
+.two-col { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--border); }
+.about-blk { padding: 44px 36px; border-right: 1px solid var(--border); }
+.about-title { font-family: 'Roboto Slab', serif; font-size: 24px; font-weight: 700; color: var(--bsa-blue); margin-bottom: 12px; }
+.about-title span { color: var(--bsa-red); }
+.about-body { font-size: 14px; font-weight: 300; color: var(--bsa-gray); line-height: 1.85; margin-bottom: 18px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag { border: 1px solid var(--border); color: var(--bsa-gray); font-family: 'Roboto Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: .04em; padding: 3px 9px; border-radius: 2px; }
+
+.event-blk { padding: 44px 36px; }
+.ev-yr { font-family: 'Roboto Slab', serif; font-size: 72px; font-weight: 700; color: rgba(0,63,135,.08); line-height: 1; }
+.ev-title { font-family: 'Roboto Slab', serif; font-size: 18px; font-weight: 700; color: var(--bsa-blue); margin-top: -6px; margin-bottom: 10px; }
+.ev-meta { font-size: 13px; font-weight: 300; color: var(--bsa-gray); line-height: 1.8; margin-bottom: 18px; }
+.ev-hl { font-family: 'Roboto Condensed', sans-serif; font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--bsa-gray-lt); margin-bottom: 8px; }
+.ev-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.ev-name-dot { width: 6px; height: 6px; background: var(--bsa-red); border-radius: 50%; flex-shrink: 0; }
+.ev-name-text { font-family: 'Roboto Slab', serif; font-size: 14px; font-weight: 700; color: var(--ink); }
+
+footer {
+  background: var(--white);
+  border-top: 3px solid var(--bsa-blue);
+  padding: 24px 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.ft-left { display: flex; align-items: center; gap: 16px; }
+.ft-oa-diamond-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+.ft-diamond {
+  width: 16px;
+  height: 16px;
+  background: var(--bsa-red);
+  transform: rotate(45deg);
+  border-radius: 1px;
+}
+.ft-oa-line { width: 1px; height: 12px; background: var(--border); }
+.ft-brand { font-family: 'Roboto Slab', serif; font-size: 13px; font-weight: 700; color: var(--bsa-blue); }
+.ft-oa-attr { font-family: 'Roboto Condensed', sans-serif; font-size: 9px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--bsa-gray-lt); margin-top: 2px; }
+.ft-copy { font-family: 'Roboto Condensed', sans-serif; font-size: 10px; color: var(--bsa-gray-lt); letter-spacing: .04em; }
+</style>
+
+<div class="heritage-bar">
+  <div class="heritage-bar-left">
+    <div class="heritage-oa-pill">
+      <div class="heritage-oa-diamond"></div>
+      <span class="heritage-oa-text">Order of the Arrow</span>
+    </div>
+    <span class="heritage-bar-right">Owasippe Lodge #7 · Chicago Area Council · BSA</span>
+  </div>
+  <span style="font-family:'Roboto Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--bsa-gray-lt);">Est. 1921</span>
+</div>
+
+<nav>
+  <div class="nav-left">
+    <div class="nav-name">Moqua Foundation</div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#">About</a></li>
+    <li><a href="#">Biographies</a></li>
+    <li><a href="#">Centurions</a></li>
+    <li><a href="#">Events</a></li>
+    <li><a href="#">Guest Lodge</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div>
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-line"></div>
+      <span class="hero-eyebrow-text">Vigil Honor · Order of the Arrow</span>
+    </div>
+    <h1 class="hero-title">Preserving<br><em>the traditions.</em></h1>
+    <p class="hero-body">Honoring the Vigil members of Owasippe Lodge #7 — a century of Scout leaders who put service above self and inspired generations of young people in Chicago.</p>
+    <div class="hero-btns">
+      <a href="#" class="btn-blue">Explore biographies</a>
+      <a href="#" class="btn-red-outline">About the Vigil Honor</a>
+    </div>
+  </div>
+  <div class="hero-photo-stack">
+    <img class="hero-photo-main" src="http://www.moqua.org/wp-content/uploads/2019/11/Vigil-Dinner-Group-11-23-2019-carousel-1480x604.jpg" alt="2019 Vigil Dinner" />
+    <img class="hero-photo-sec" src="http://www.moqua.org/wp-content/uploads/2018/11/Owasippe-Lodge-7-Chiefs-11-17-2018-carousel-1480x604.jpg" alt="Lodge Chiefs 2018" />
+    <div class="hero-oa-callout">
+      <div class="hero-oa-callout-label">Vigil Honor</div>
+      <div class="hero-oa-callout-text">Leadership in Service</div>
+    </div>
+  </div>
+</section>
+
+<div class="stat-bar">
+  <div class="stat-item"><span class="stat-n">1921</span><span class="stat-l">Year founded</span></div>
+  <div class="stat-item"><span class="stat-n">100+</span><span class="stat-l">Years of service</span></div>
+  <div class="stat-item"><span class="stat-n">31</span><span class="stat-l">Honored members</span></div>
+  <div class="stat-item"><span class="stat-n">10+</span><span class="stat-l">Annual dinners</span></div>
+</div>
+
+<section class="honorees-section">
+  <div class="sec-head">
+    <div>
+      <div class="sec-eyebrow">Vigil Honor</div>
+      <h2 class="sec-title">Recent honorees</h2>
+    </div>
+    <a href="#" class="see-all">View all biographies →</a>
+  </div>
+  <div class="hgrid">
+    <div class="hcard">
+      <img src="http://www.moqua.org/wp-content/uploads/2019/11/Scanlan-Carousel-Picture-1480x604.jpg" alt="Rev. F. Gerald Scanlan" />
+      <div class="hcard-body">
+        <div class="hcard-yr">2019 Honoree</div>
+        <div class="hcard-name">Rev. F. Gerald Scanlan</div>
+        <div class="hcard-sub">Eagle Scout · Ordained 1961</div>
+      </div>
+    </div>
+    <div class="hcard">
+      <img src="http://www.moqua.org/wp-content/uploads/2019/11/Temple-Carousel-Photo-1480x604.jpg" alt="Ronald J. Temple, Ph.D." />
+      <div class="hcard-body">
+        <div class="hcard-yr">2019 Honoree</div>
+        <div class="hcard-name">Ronald J. Temple, Ph.D.</div>
+        <div class="hcard-sub">Elachtoniket · The Seeker</div>
+      </div>
+    </div>
+    <div class="hcard">
+      <img src="http://www.moqua.org/wp-content/uploads/2018/11/Muraski-carousel-picture-1480x604.jpg" alt="Grant F. Muraski" />
+      <div class="hcard-body">
+        <div class="hcard-yr">2018 Honoree</div>
+        <div class="hcard-name">Grant F. Muraski</div>
+        <div class="hcard-sub">Vigil Honor · Lodge #7</div>
+      </div>
+    </div>
+    <div class="hcard">
+      <img src="http://www.moqua.org/wp-content/uploads/2018/11/Sublette-carousel-picture-1480x604.jpg" alt="Robert T. Sublette, Sr." />
+      <div class="hcard-body">
+        <div class="hcard-yr">2018 Honoree</div>
+        <div class="hcard-name">Robert T. Sublette, Sr.</div>
+        <div class="hcard-sub">Vigil Honor · Lodge #7</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="two-col">
+  <div class="about-blk">
+    <h2 class="about-title">Leadership<br><span>in Service</span></h2>
+    <p class="about-body">The watchwords of the Vigil Honor — not just an honor, but a call to even greater service. Owasippe Lodge #7 has answered this call since 1921. The Moqua Foundation preserves the stories of those who answered it most fully.</p>
+    <div class="tags">
+      <span class="tag">Owasippe Lodge #7</span>
+      <span class="tag">Order of the Arrow</span>
+      <span class="tag">Chicago Area Council</span>
+      <span class="tag">BSA</span>
+    </div>
+  </div>
+  <div class="event-blk">
+    <div class="ev-yr">2020</div>
+    <h3 class="ev-title">Vigil Alumni Annual Dinner</h3>
+    <div class="ev-meta">November 21, 2020<br>European Chalet Banquet Hall, Chicago<br>Fellowship 5:30 PM · Dinner 7:00 PM</div>
+    <div class="ev-hl">This year's honorees</div>
+    <div class="ev-name"><div class="ev-name-dot"></div><span class="ev-name-text">John P. Dozier</span></div>
+    <div class="ev-name"><div class="ev-name-dot"></div><span class="ev-name-text">Robert M. Ward</span></div>
+  </div>
+</div>
+
+<footer>
+  <div class="ft-left">
+    <div class="ft-oa-diamond-wrap">
+      <div class="ft-diamond"></div>
+    </div>
+    <div>
+      <div class="ft-brand">Moqua Foundation</div>
+      <div class="ft-oa-attr">Order of the Arrow · Owasippe Lodge #7 · Chicago Area Council · BSA</div>
+    </div>
+  </div>
+  <div class="ft-copy">© 2026 Moqua Foundation · All rights reserved</div>
+</footer>

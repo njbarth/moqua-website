@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moqua Foundation — Interactive Prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;700&family=Roboto+Condensed:ital,wght@0,400;0,700;1,400&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   DESIGN TOKENS
+   ============================================================ */
+:root {
+  --blue:    #003F87;
+  --blue-dk: #003366;
+  --blue-lt: #EEF3FA;
+  --blue-pale: #D4E2F4;
+  --red:     #CE1126;
+  --red-dk:  #9E0C1E;
+  --red-lt:  #FAE8EB;
+  --tan:     #D6CEBD;
+  --tan-lt:  #F0EDE7;
+  --tan-dk:  #AD9D7B;
+  --gray:    #515354;
+  --gray-lt: #858787;
+  --white:   #ffffff;
+  --ink:     #1a1917;
+  --border:  rgba(0,0,0,.08);
+  --shadow:  0 2px 12px rgba(0,63,135,.1);
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Roboto',sans-serif;background:var(--white);color:var(--ink);font-size:14px;line-height:1.5;min-height:100vh;}
+img{max-width:100%;}
+a{text-decoration:none;color:inherit;}
+button,input,select,textarea{font-family:inherit;}
+
+/* ============================================================
+   PROTOTYPE NAV BAR
+   ============================================================ */
+.proto-bar {
+  position:fixed;bottom:0;left:0;right:0;
+  background:rgba(26,25,23,.96);backdrop-filter:blur(8px);
+  border-top:2px solid var(--red);
+  padding:8px 20px;
+  display:flex;align-items:center;gap:8px;
+  z-index:9999;
+  flex-wrap:wrap;
+}
+.proto-label {
+  font-family:'Roboto Condensed',sans-serif;
+  font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(255,255,255,.4);margin-right:4px;white-space:nowrap;
+}
+.proto-btn {
+  font-family:'Roboto Condensed',sans-serif;
+  font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  padding:5px 10px;border-radius:2px;border:1px solid rgba(255,255,255,.15);
+  background:transparent;color:rgba(255,255,255,.65);cursor:pointer;white-space:nowrap;
+  transition:all .15s;
+}
+.proto-btn:hover{background:rgba(255,255,255,.1);color:var(--white);}
+.proto-btn.active{background:var(--red);border-color:var(--red);color:var(--white);}
+
+/* ============================================================
+   PAGE SYSTEM
+   ============================================================ */
+.page{display:none;min-height:100vh;padding-bottom:56px;}
+.page.active{display:block;}
+
+/* ============================================================
+   GLOBAL COMPONENTS
+   ============================================================ */
+
+/* OA top band */
+.oa-band{
+  background:var(--red);padding:5px 36px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.oa-text{
+  font-family:'Roboto Condensed',sans-serif;
+  font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(255,255,255,.9);
+}
+
+/* Main nav */
+.main-nav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 36px;height:56px;border-bottom:1px solid var(--border);
+  background:var(--white);position:sticky;top:0;z-index:100;
+}
+.nav-brand-wrap{display:flex;align-items:center;gap:10px;cursor:pointer;}
+.nav-mark{width:32px;height:32px;background:var(--blue);border-radius:3px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.nav-mark-inner{width:14px;height:14px;border:2px solid rgba(255,255,255,.7);border-radius:2px;}
+.nav-name{font-family:'Roboto Slab',serif;font-size:15px;font-weight:700;color:var(--blue);}
+.nav-sub{font-family:'Roboto Condensed',sans-serif;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-lt);}
+.nav-links{display:flex;gap:2px;list-style:none;}
+.nav-links a{
+  font-family:'Roboto Condensed',sans-serif;
+  font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--gray);padding:5px 9px;border-radius:3px;cursor:pointer;
+  transition:background .12s;
+}
+.nav-links a:hover{background:var(--blue-lt);color:var(--blue);}
+.nav-links a.active{background:var(--blue-lt);color:var(--blue);}
+
+/* Page headers */
+.page-header{
+  background:var(--blue);padding:44px 36px;
+  position:relative;overflow:hidden;
+}
+.page-header::before{
+  content:'';position:absolute;left:0;top:0;width:8px;height:100%;background:var(--red);
+}
+.breadcrumb{
+  font-family:'Roboto Condensed',sans-serif;
+  font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(255,255,255,.45);margin-bottom:10px;
+}
+.breadcrumb span{color:rgba(255,255,255,.8);}
+.page-title{font-family:'Roboto Slab',serif;font-size:36px;font-weight:700;color:var(--white);line-height:1.1;margin-bottom:8px;}
+.page-sub{font-size:14px;font-weight:300;color:rgba(255,255,255,.7);}
+
+/* Eyebrow + section titles */
+.eyebrow{font-family:'Roboto Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--red);margin-bottom:8px;}
+.sec-title{font-family:'Roboto Slab',serif;font-size:22px;font-weight:700;color:var(--blue);margin-bottom:20px;display:flex;align-items:center;gap:12px;}
+.sec-title::after{content:'';flex:1;height:1px;background:var(--border);}
+
+/* Footer */
+.site-footer{
+  background:var(--blue-dk);padding:20px 36px;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;
+}
+.ft-brand{font-family:'Roboto Slab',serif;font-size:13px;font-weight:700;color:var(--white);}
+.ft-oa{font-family:'Roboto Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-top:2px;}
+.ft-copy{font-family:'Roboto Condensed',sans-serif;font-size:10px;color:rgba(255,255,255,.3);letter-spacing:.04em;}
+
+/* Buttons */
+.btn-blue{background:var(--blue);color:var(--white);font-family:'Roboto Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:11px 20px;border-radius:3px;border:none;cursor:pointer;display:inline-block;}
+.btn-red{background:var(--red);color:var(--white);font-family:'Roboto Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:11px 20px;border-radius:3px;border:none;cursor:pointer;display:inline-block;}
+.btn-white{background:var(--white);color:var(--blue);font-family:'Roboto Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:11px 20px;border-radius:3px;border:none;cursor:pointer;display:inline-block;}
+.btn-ghost{border:1px solid rgba(255,255,255,.35);color:rgba(255,255,255,.9);font-family:'Roboto Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:11px 20px;border-radius:3px;background:transparent;cursor:pointer;display:inline-block;}
+.btn-outline{border:1px solid var(--border);color:var(--blue);font-family:'Roboto Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:10px 18px;border-radius:3px;background:var(--white);cursor:pointer;display:inline-block;}
+
+/* Cards */
+.card{border:1px solid var(--border);border-radius:4px;overflow:hidden;transition:transform .15s,box-shadow .15s;cursor:pointer;}
+.card:hover{transform:translateY(-2px);box-shadow:var(--shadow);}
+
+/* Sidebar layout */
+.with-sidebar{display:grid;grid-template-columns:1fr 300px;}
+.sidebar{padding:36px 28px;border-left:1px solid var(--border);background:var(--tan-lt);}
+.sidebar-label{font-family:'Roboto Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--red);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border);}
+
+/* ============================================================
+   PAGE: HOME
+   ============================================================ */
+.hero{
+  background:var(--blue);padding:56px 36px 52px;
+  display:grid;grid-template-columns:1fr 440px;gap:52px;align-items:center;
+  position:relative;overflow:hidden;
+}
+.hero::before{content:'';position:absolute;left:0;top:0;width:8px;height:100%;background:var(--red);}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;margin-bottom:20px;padding:5px 12px 5px 8px;border:1px solid rgba(206,17,38,.5);border-radius:3px;background:rgba(206,17,38,.08);}
+.hero-tag-dot{width:6px;height:6px;background:var(--red);border-radius:50%;}
+.hero-tag-text{font-family:'Roboto Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.85);}
+.hero-title{font-family:'Roboto Slab',serif;font-size:44px;font-weight:700;line-height:1.08;color:var(--white);margin-bottom:16px;}
+.hero-title em{font-style:italic;font-weight:300;color:var(--tan);}
+.hero-body{font-size:15px;font-weight:300;line-height:1.8;color:rgba(255,255,255,.78);margin-bottom:28px;max-width:460px;}
+.hero-btns{display:flex;gap:10px;flex-wrap:wrap;}
+.hero-photos{position:relative;height:280px;}
+.hero-photo-main{position:absolute;right:0;top:0;width:320px;height:210px;object-fit:cover;border-radius:3px;border:3px solid rgba(255,255,255,.15);}
+.hero-photo-sec{position:absolute;left:0;bottom:0;width:190px;height:150px;object-fit:cover;border-radius:3px;border:3px solid rgba(255,255,255,.15);}
+
+.stat-bar-red{background:var(--red);display:grid;grid-template-columns:repeat(4,1fr);}
+.stat-item{padding:16px 24px;border-right:1px solid rgba(255,255,255,.2);text-align:center;}
+.stat-item:last-child{border-right:none;}
+.stat-n{font-family:'Roboto Slab',serif;font-size:24px;font-weight:700;color:var(--white);display:block;}
+.stat-l{font-family:'Roboto Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.65);display:block;margin-top:3px;}
+
+.honorees-section{padding:48px 36px;}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:24px;}
+.see-all{font-family:'Roboto Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--blue);cursor:pointer;}
+.hgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+.hcard{border:1px solid var(--border);border-radius:3px;overflow:hidden;cursor:pointer;transition:transform .15s;}
+.hcard:hover{transform:translateY(-2px);box-shadow:var(--shadow);}
+.hcard img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;}
+.hcard-body{padding:11px 12px 13px;border-top:2px solid var(--red);}
+.hcard-yr{font-family:'Roboto Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin-bottom:5px;}
+.hcard-name{font-family:'Roboto Slab',serif;font-size:13px;font-weight:700;color:var(--ink);line-height:1.25;margin-bottom:3px;}
+.hcard-sub{font-size:11px;font-style:italic;color:var(--gray-lt);}
+
+.two-col{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--border);}
+.about-blk{padding:44px 36px;border-right:1px solid var(--border);background:var(--tan-lt);}
+.about-rule{width:28px;height:4px;background:var(--red);border-radius:2px;margin-bottom:18px;}
+.about-title{font-family:'Roboto Slab',serif;font-size:24px;font-weight:700;color:var(--blue);margin-bottom:12px;}
+.about-body{font-size:14px;font-weight:300;color:var(--gray);line-height:1.85;margin-bottom:18px;}
+.tags{display:flex;flex-wrap:wrap;gap:6px;}
+.tag{border:1px solid var(--border);color:var(--gray);font-family:'Roboto Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:.04em;padding:3px 9px;border-radius:2px;}
+.event-blk{padding:44px 36px;}
+.ev-yr{font-family:'Roboto Slab',serif;font-size:72px;font-weight:700;color:rgba(0,63,135,.08);line-height:1;}
+.ev-title{font-family:'Roboto Slab',serif;font-size:18px;font-weight:700;color:var(--blue);margin-top:-6px;margin-bottom:10px;}
+.ev-meta{font-size:13px;font-weight:300;color:var(--gray);line-height:1.8;margin-bottom:18px;}
+.ev-hl{font-family:'Roboto Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gray-lt);margin-bottom:8px;}
+.ev-name{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.ev-dot{width:6px;height:6px;background:var(--red);border-radius:50%;flex-shrink:0;}
+.ev-name-text{font-family:'Roboto Slab',serif;font-size:14px;font-weight:700;color:var(--ink);}
+
+/* ============================================================
+   PAGE: ABOUT
+   ============================================================ */
+.about-grid{display:grid;grid-template-columns:240px 1fr;min-height:400px;}
+.about-sidebar-nav{background:var(--blue-dk);padding:32px 20px;}
+.sidebar-nav-label{font-family:'Roboto Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.3);padding:0 8px;margin:16px 0 6px;}
+.snav-item{display:block;padding:9px 10px;font-family:'Roboto Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.6);border-radius:3px;margin-bottom:2px;cursor:pointer;transition:background .12s;}
+.snav-item:hover{background:rgba(255,255,255,.08);color:var(--white);}
+.snav-item.active{background:var(--red);color:var(--white);}
+.about-content{padding:44px 48px;}
+.content-rule{width:32px;height:3px;background:var(--red);border-radius:2px;margin-bottom:24px;}
+.content-h2{font-family:'Roboto Slab',serif;font-size:26px;font-weight:700;color:var(--blue);margin-bottom:16px;}
+.content-body{font-size:14px;font-weight:300;color:var(--gray);line-height:1.85;margin-bottom:24px;max-width:620px;}
+.content-body p{margin-bottom:14px;}
+.mission-card{background:var(--blue);border-radius:4px;padding:26px 30px;margin-bottom:24px;max-width:620px;position:relative;overflow:hidden;}
+.mission-card::before{content:'';position:absolute;left:0;top:0;width:6px;height:100%;background:var(--red);}
+.mission-quote{font-family:'Roboto Slab',serif;font-size:19px;font-weight:300;font-style:italic;color:var(--white);line-height:1.6;margin-bottom:10px;}
+.mission-attr{font-family:'Roboto Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:620px;}
+.info-card{border:1px solid var(--border);border-radius:4px;padding:18px 20px;}
+.ic-label{font-family:'Roboto Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--red);margin-bottom:5px;}
+.ic-title{font-family:'Roboto Slab',serif;font-size:14px;font-weight:700;color:var(--blue);margin-bottom:5px;}
+.ic-body{font-size:12px;font-weight:300;color:var(--gray);line-height:1.7;}
+
+/* ============================================================
+   PAGE: BIO INDEX
+   ============================================================ */
+.filter-bar{background:var(--tan-lt);border-bottom:1px solid var(--border);padding:12px 36px;display:flex;align-items:center;gap:10px;}
+.filter-label{font-family:'Roboto Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-lt);}
+.filter-btn{font-family:'Roboto Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:5px 12px;border-radius:2px;border:1px solid var(--border);background:var(--white);color:var(--gray);cursor:pointer;}
+.filter-btn.active{background:var(--blue);color:var(--white);border-color:var(--blue);}
+.bio-grid-section{padding:36px 36px 48px;}
+.bio-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;}
+.bio-card{cursor:pointer;border:1px solid var(--border);border-radius:3px;overflow:hidden;transition:transform .15s,box-shadow .15s;}
+.bio-card:hover{transform:translateY(-3px);box-shadow:var(--shadow);}
+.bio-card img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block;}
+.bio-card-body{padding:10px 11px 12px;border-top:2px solid var(--red);}
+.bio-card-name{font-family:'Roboto Slab',serif;font-size:12px;font-weight:700;color:var(--ink);line-height:1.3;margin-bottom:2px;}
+.bio-card-vigil{font-size:10px;font-style:italic;color:var(--gray-lt);margin-bottom:3px;}
+.bio-card-date{font-family:'Roboto Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--red);}
+
+/* ============================================================
+   PAGE: BIO PROFILE
+   ============================================================ */
+.profile-hero{background:var(--blue);display:grid;grid-template-columns:260px 1fr;position:relative;overflow:hidden;}
+.profile-hero::before{content:'';position:absolute;left:0;top:0;width:8px;height:100%;background:var(--red);}
+.profile-photo-col{padding:32px 24px 0 44px;display:flex;flex-direction:column;align-items:center;}
+.profile-photo{width:170px;height:210px;object-fit:cover;border-radius:3px;border:3px solid rgba(255,255,255,.2);display:block;}
+.profile-photo-caption{font-family:'Roboto Condensed',sans-serif;font-size:9px;color:rgba(255,255,255,.4);margin-top:7px;text-align:center;font-style:italic;}
+.profile-info-col{padding:36px 36px 36px 28px;display:flex;flex-direction:column;justify-content:center;}
+.profile-bc{font-family:'Roboto Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:10px;cursor:pointer;}
+.profile-bc span{color:rgba(255,255,255,.75);}
+.profile-name{font-family:'Roboto Slab',serif;font-size:34px;font-weight:700;color:var(--white);line-height:1.1;margin-bottom:6px;}
+.vigil-wrap{display:flex;align-items:center;gap:10px;margin-bottom:18px;}
+.vigil-badge{background:var(--red);padding:4px 10px;border-radius:2px;}
+.vigil-badge-text{font-family:'Roboto Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--white);}
+.vigil-name{font-family:'Roboto Slab',serif;font-size:15px;font-style:italic;font-weight:300;color:rgba(255,255,255,.85);}
+.vigil-trans{font-family:'Roboto',sans-serif;font-size:11px;color:rgba(255,255,255,.5);font-style:italic;}
+.profile-meta-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;}
+.pmi{padding:12px 0 12px 14px;border-left:2px solid rgba(255,255,255,.1);}
+.pmi-label{font-family:'Roboto Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:2px;}
+.pmi-val{font-family:'Roboto Slab',serif;font-size:13px;font-weight:700;color:var(--white);}
+.profile-body-area{display:grid;grid-template-columns:1fr 280px;border-top:1px solid var(--border);}
+.profile-content{padding:40px 40px 52px 36px;}
+.bio-text{font-size:14px;font-weight:300;color:var(--gray);line-height:1.9;max-width:580px;}
+.bio-text p{margin-bottom:14px;}
+.profile-sidebar{padding:32px 24px;border-left:1px solid var(--border);background:var(--tan-lt);}
+.sidebar-fact{margin-bottom:12px;}
+.sf-key{font-family:'Roboto Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gray-lt);margin-bottom:2px;}
+.sf-val{font-family:'Roboto Slab',serif;font-size:13px;font-weight:400;color:var(--ink);}
+.sidebar-next-card{display:flex;align-items:center;gap:10px;padding:10px;background:var(--white);border:1px solid var(--border);border-radius:3px;cursor:pointer;margin-bottom:8px;}
+.sidebar-next-card:hover{border-color:var(--blue-pale);}
+.sidebar-next-card img{width:42px;height:50px;object-fit:cover;border-radius:2px;flex-shrink:0;}
+.snc-label{font-family:'Roboto Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-lt);margin-bottom:2px;}
+.snc-name{font-family:'Roboto Slab',serif;font-size:12px;font-weight:700;color:var(--blue);}
+
+/* ============================================================
+   PAGE: EVENTS ARCHIVE
+   ============================================================ */
+.timeline-section{padding:44px 36px;}
+.dinner-row{display:grid;grid-template-columns:80px 1fr;margin-bottom:0;position:relative;}
+.dinner-row::before{content:'';position:absolute;left:39px;top:32px;bottom:-4px;width:2px;background:var(--border);}
+.dinner-row:last-child::before{display:none;}
+.dinner-year-col{display:flex;flex-direction:column;align-items:center;padding-top:14px;}
+.year-node{width:20px;height:20px;background:var(--red);border-radius:50%;border:3px solid var(--white);box-shadow:0 0 0 2px var(--red);z-index:1;flex-shrink:0;}
+.year-label{font-family:'Roboto Slab',serif;font-size:11px;font-weight:700;color:var(--blue);margin-top:5px;text-align:center;}
+.dinner-card{margin:6px 0 22px 16px;border:1px solid var(--border);border-radius:4px;overflow:hidden;display:grid;grid-template-columns:200px 1fr;cursor:pointer;transition:box-shadow .15s;}
+.dinner-card:hover{box-shadow:var(--shadow);}
+.dinner-card-img{width:200px;height:140px;object-fit:cover;display:block;}
+.dinner-card-body{padding:18px 22px;display:flex;flex-direction:column;justify-content:space-between;}
+.dc-date{font-family:'Roboto Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin-bottom:5px;}
+.dc-title{font-family:'Roboto Slab',serif;font-size:17px;font-weight:700;color:var(--blue);margin-bottom:5px;}
+.dc-venue{font-size:12px;font-weight:300;color:var(--gray-lt);margin-bottom:10px;}
+.dc-hl{font-family:'Roboto Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-lt);margin-bottom:5px;}
+.dc-chips{display:flex;gap:6px;flex-wrap:wrap;}
+.dc-chip{background:var(--blue-lt);border:1px solid rgba(0,63,135,.15);padding:3px 9px;border-radius:2px;font-family:'Roboto Slab',serif;font-size:11px;font-weight:700;color:var(--blue);}
+.dc-link{font-family:'Roboto Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);}
+.legacy-section{background:var(--tan-lt);border-top:1px solid var(--border);padding:28px 36px;display:flex;align-items:center;justify-content:space-between;}
+.legacy-title{font-family:'Roboto Slab',serif;font-size:17px;font-weight:700;color:var(--blue);}
+.legacy-sub{font-size:12px;font-weight:300;color:var(--gray-lt);margin-top:3px;}
+
+/* ============================================================
+   PAGE: EVENT DETAIL
+   ============================================================ */
+.event-hero{background:var(--blue);position:relative;overflow:hidden;}
+.event-hero-img{width:100%;height:240px;object-fit:cover;opacity:.3;display:block;}
+.event-hero-overlay{position:absolute;inset:0;display:grid;grid-template-columns:1fr auto;align-items:flex-end;padding:0 36px 32px;}
+.event-hero::before{content:'';position:absolute;left:0;top:0;width:8px;height:100%;background:var(--red);z-index:2;}
+.event-title-hero{font-family:'Roboto Slab',serif;font-size:34px;font-weight:700;color:var(--white);line-height:1.1;margin-bottom:8px;}
+.event-date-pill{display:inline-flex;align-items:center;background:var(--red);padding:5px 13px;border-radius:2px;}
+.event-date-pill-text{font-family:'Roboto Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--white);}
+.event-yr-badge{font-family:'Roboto Slab',serif;font-size:68px;font-weight:700;color:rgba(255,255,255,.12);line-height:1;align-self:flex-end;}
+.event-meta-bar{background:var(--blue-dk);display:grid;grid-template-columns:repeat(4,1fr);}
+.emi{padding:14px 22px;border-right:1px solid rgba(255,255,255,.1);}
+.emi:last-child{border-right:none;}
+.emi-label{font-family:'Roboto Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:2px;}
+.emi-val{font-family:'Roboto Slab',serif;font-size:13px;font-weight:700;color:var(--white);}
+.emi-sub{font-size:11px;font-weight:300;color:rgba(255,255,255,.55);margin-top:1px;}
+.honoree-pair{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:32px;}
+.hf-card{border:1px solid var(--border);border-radius:4px;overflow:hidden;display:grid;grid-template-columns:110px 1fr;cursor:pointer;}
+.hf-card:hover{box-shadow:var(--shadow);}
+.hf-img{width:110px;height:140px;object-fit:cover;display:block;}
+.hf-body{padding:14px 16px;display:flex;flex-direction:column;justify-content:center;}
+.hf-yr{font-family:'Roboto Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin-bottom:5px;}
+.hf-name{font-family:'Roboto Slab',serif;font-size:15px;font-weight:700;color:var(--blue);margin-bottom:4px;line-height:1.2;}
+.hf-vigil{font-size:11px;font-style:italic;color:var(--gray-lt);margin-bottom:10px;}
+.hf-link{font-family:'Roboto Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);}
+.program-timeline{display:flex;flex-direction:column;}
+.prog-item{display:grid;grid-template-columns:90px 1fr;gap:14px;padding:12px 0;border-bottom:1px solid var(--border);}
+.prog-time{font-family:'Roboto Slab',serif;font-size:14px;font-weight:700;color:var(--blue);}
+.prog-desc{font-size:13px;font-weight:300;color:var(--gray);padding-top:2px;}
+.event-content-area{padding:40px 36px 52px;}
+.event-sidebar-inner{padding:28px;}
+.esd-item{margin-bottom:12px;}
+.esd-key{font-family:'Roboto Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gray-lt);margin-bottom:2px;}
+.esd-val{font-family:'Roboto Slab',serif;font-size:13px;font-weight:400;color:var(--ink);line-height:1.4;}
+.view-photos-btn{display:block;background:var(--blue);color:var(--white);font-family:'Roboto Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:11px;border-radius:3px;text-align:center;cursor:pointer;margin-top:18px;}
+.yr-nav{display:flex;justify-content:space-between;margin-top:20px;padding-top:16px;border-top:1px solid var(--border);}
+.yr-nav-btn{font-family:'Roboto Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);cursor:pointer;}
+
+/* ============================================================
+   PAGE: GUEST LODGE
+   ============================================================ */
+.lodge-hero{background:var(--blue);display:grid;grid-template-columns:1fr 380px;min-height:260px;position:relative;overflow:hidden;}
+.lodge-hero::before{content:'';position:absolute;left:0;top:0;width:8px;height:100%;background:var(--red);}
+.lodge-hero-text{padding:44px 32px 44px 44px;display:flex;flex-direction:column;justify-content:center;}
+.lodge-title{font-family:'Roboto Slab',serif;font-size:34px;font-weight:700;color:var(--white);line-height:1.1;margin-bottom:10px;}
+.lodge-sub{font-size:14px;font-weight:300;color:rgba(255,255,255,.75);max-width:400px;line-height:1.7;}
+.lodge-hero-img{position:relative;overflow:hidden;}
+.lodge-hero-img img{width:100%;height:100%;object-fit:cover;opacity:.55;display:block;}
+.lodge-hero-img::after{content:'';position:absolute;left:0;top:0;bottom:0;width:60px;background:linear-gradient(to right,var(--blue),transparent);}
+.status-bar{background:var(--blue-dk);padding:13px 36px;display:flex;align-items:center;gap:18px;}
+.status-badge{display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);padding:5px 12px;border-radius:3px;}
+.status-dot{width:7px;height:7px;background:#5cb85c;border-radius:50%;flex-shrink:0;}
+.status-text{font-family:'Roboto Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.85);}
+.lodge-content{padding:40px 36px 52px;}
+.lodge-text{font-size:14px;font-weight:300;color:var(--gray);line-height:1.9;max-width:580px;margin-bottom:24px;}
+.lodge-text p{margin-bottom:14px;}
+.gallery-preview{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:24px;}
+.gallery-thumb{aspect-ratio:4/3;border-radius:3px;overflow:hidden;cursor:pointer;}
+.gallery-thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:opacity .15s;}
+.gallery-thumb:hover img{opacity:.8;}
+.gallery-more{background:var(--blue);display:flex;align-items:center;justify-content:center;border-radius:3px;cursor:pointer;}
+.gallery-more-n{font-family:'Roboto Slab',serif;font-size:18px;font-weight:700;color:var(--white);}
+.donate-card{background:var(--red);border-radius:4px;padding:22px;margin-bottom:16px;}
+.donate-label{font-family:'Roboto Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:7px;}
+.donate-title{font-family:'Roboto Slab',serif;font-size:17px;font-weight:700;color:var(--white);margin-bottom:9px;line-height:1.2;}
+.donate-body{font-size:12px;font-weight:300;color:rgba(255,255,255,.8);line-height:1.7;margin-bottom:14px;}
+.donate-btn{display:block;background:var(--white);color:var(--red);font-family:'Roboto Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:10px;border-radius:3px;text-align:center;cursor:pointer;}
+.info-blk{background:var(--white);border:1px solid var(--border);border-radius:4px;padding:16px;margin-bottom:10px;}
+.info-blk-label{font-family:'Roboto Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin-bottom:5px;}
+.info-blk-title{font-family:'Roboto Slab',serif;font-size:14px;font-weight:700;color:var(--blue);margin-bottom:4px;}
+.info-blk-body{font-size:12px;font-weight:300;color:var(--gray);line-height:1.6;}
+
+/* ============================================================
+   PAGE: CONTACT
+   ============================================================ */
+.contact-form-area{padding:40px 36px 52px;}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px;max-width:560px;}
+.form-full{grid-column:1/-1;}
+.form-group{display:flex;flex-direction:column;gap:4px;}
+.form-label{font-family:'Roboto Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gray);}
+.form-label span{color:var(--red);}
+.form-input{border:1px solid var(--border);border-radius:3px;padding:9px 11px;font-size:13px;color:var(--ink);background:var(--white);}
+.form-input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 2px rgba(0,63,135,.08);}
+.form-textarea{resize:vertical;min-height:110px;}
+.form-select{border:1px solid var(--border);border-radius:3px;padding:9px 11px;font-size:13px;color:var(--ink);background:var(--white);}
+.form-note{font-size:11px;font-weight:300;color:var(--gray-lt);margin-top:14px;font-style:italic;}
+.mailing-card{background:var(--blue);border-radius:4px;padding:20px;margin-bottom:16px;}
+.mailing-label{font-family:'Roboto Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:7px;}
+.mailing-title{font-family:'Roboto Slab',serif;font-size:16px;font-weight:700;color:var(--white);margin-bottom:8px;}
+.mailing-body{font-size:12px;font-weight:300;color:rgba(255,255,255,.75);line-height:1.6;margin-bottom:13px;}
+.mailing-input{border:none;border-radius:3px;padding:8px 11px;font-size:12px;color:var(--ink);width:100%;margin-bottom:7px;display:block;}
+.mailing-btn{background:var(--red);color:var(--white);font-family:'Roboto Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:9px;border-radius:3px;border:none;cursor:pointer;width:100%;}
+.contact-info-blk{background:var(--white);border:1px solid var(--border);border-radius:4px;padding:16px;margin-bottom:10px;}
+.cib-label{font-family:'Roboto Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin-bottom:5px;}
+.cib-title{font-family:'Roboto Slab',serif;font-size:13px;font-weight:700;color:var(--blue);margin-bottom:4px;}
+.cib-body{font-size:12px;font-weight:300;color:var(--gray);line-height:1.6;}
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+.page.active .hero,
+.page.active .page-header,
+.page.active .profile-hero,
+.page.active .event-hero,
+.page.active .lodge-hero{animation:fadeUp .35s ease both;}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     PROTOTYPE NAV
+     ============================================================ -->
+<div class="proto-bar">
+  <span class="proto-label">Prototype:</span>
+  <button class="proto-btn active" onclick="showPage('home')">Home</button>
+  <button class="proto-btn" onclick="showPage('about')">About</button>
+  <button class="proto-btn" onclick="showPage('bio-index')">Bio Index</button>
+  <button class="proto-btn" onclick="showPage('bio-profile')">Bio Profile</button>
+  <button class="proto-btn" onclick="showPage('events')">Events</button>
+  <button class="proto-btn" onclick="showPage('event-detail')">Event Detail</button>
+  <button class="proto-btn" onclick="showPage('guest-lodge')">Guest Lodge</button>
+  <button class="proto-btn" onclick="showPage('contact')">Contact</button>
+</div>
+
+<!-- ============================================================
+     PAGE: HOME
+     ============================================================ -->
+<div id="page-home" class="page active">
+  <div class="oa-band">
+    <span class="oa-text">Order of the Arrow · Owasippe Lodge #7 · Chicago Area Council · BSA</span>
+    <span class="oa-text" style="color:rgba(255,255,255,.55)">Est. 1921</span>
+  </div>
+  <nav class="main-nav">
+    <div class="nav-brand-wrap" onclick="showPage('home')">
+      <div class="nav-mark"><div class="nav-mark-inner"></div></div>
+      <div><div class="nav-name">Moqua Foundation</div><div class="nav-sub">Owasippe Lodge #7 · Since 1921</div></div>
+    </div>
+    <ul class="nav-links">
+      <li><a class="active" onclick="showPage('about')">About</a></li>
+      <li><a onclick="showPage('bio-index')">Biographies</a></li>
+      <li><a onclick="showPage('bio-index')">Centurions</a></li>
+      <li><a onclick="showPage('events')">Events</a></li>
+      <li><a onclick="showPage('guest-lodge')">Guest Lodge</a></li>
+      <li><a onclick="showPage('contact')">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div>
+      <div class="hero-tag"><div class="hero-tag-dot"></div><span class="hero-tag-text">Vigil Honor · Est. 1921 · Chicago Area Council</span></div>
+      <h1 class="hero-title">Preserving<br><em>the traditions.</em></h1>
+      <p class="hero-body">Honoring the Vigil members of Owasippe Lodge #7 — a century of Scout leaders who put service above self and inspired generations of young people in Chicago.</p>
+      <div class="hero-btns">
+        <span class="btn-white" onclick="showPage('bio-index')">Explore biographies</span>
+        <span class="btn-ghost" onclick="showPage('about')">About the Vigil Honor</span>
+      </div>
+    </div>
+    <div class="hero-photos">
+      <img class="hero-photo-main" src="http://www.moqua.org/wp-content/uploads/2019/11/Vigil-Dinner-Group-11-23-2019-carousel-1480x604.jpg" alt="2019 Vigil Dinner" />
+      <img class="hero-photo-sec" src="http://www.moqua.org/wp-content/uploads/2018/11/Owasippe-Lodge-7-Chiefs-11-17-2018-carousel-1480x604.jpg" alt="Lodge Chiefs 2018" />
+    </div>
+  </section>
+
+  <div class="stat-bar-red">
+    <div class="stat-item"><span class="stat-n">1921</span><span class="stat-l">Year founded</span></div>
+    <div class="stat-item"><span class="stat-n">100+</span><span class="stat-l">Years of service</span></div>
+    <div class="stat-item"><span class="stat-n">31</span><span class="stat-l">Honored members</span></div>
+    <div class="stat-item"><span class="stat-n">10+</span><span class="stat-l">Annual dinners</span></div>
+  </div>
+
+  <section class="honorees-section">
+    <div class="sec-head">
+      <div><div class="eyebrow">Vigil Honor</div><h2 style="font-family:'Roboto Slab',serif;font-size:22px;font-weight:700;color:var(--blue)">Recent honorees</h2></div>
+      <span class="see-all" onclick="showPage('bio-index')">View all biographies →</span>
+    </div>
+    <div class="hgrid">
+      <div class="hcard" onclick="showPage('bio-profile')">
+        <img src="http://www.moqua.org/wp-content/uploads/2019/11/Scanlan-Carousel-Picture-1480x604.jpg" alt="Rev. F. Gerald Scanlan" />
+        <div class="hcard-body"><div class="hcard-yr">2019 Honoree</div><div class="hcard-name">Rev. F. Gerald Scanlan</div><div class="hcard-sub">Eagle Scout · Ordained 1961</div></div>
+      </div>
+      <div class="hcard" onclick="showPage('bio-profile')">
+        <img src="http://www.moqua.org/wp-content/uploads/2019/11/Temple-Carousel-Photo-1480x604.jpg" alt="Ronald J. Temple, Ph.D." />
+        <div class="hcard-body"><div class="hcard-yr">2019 Honoree</div><div class="hcard-name">Ronald J. Temple, Ph.D.</div><div class="hcard-sub">Elachtoniket · The Seeker</div></div>
+      </div>
+      <div class="hcard" onclick="showPage('bio-profile')">
+        <img src="http://www.moqua.org/wp-content/uploads/2018/11/Muraski-carousel-picture-1480x604.jpg" alt="Grant F. Muraski" />
+        <div class="hcard-body"><div class="hcard-yr">2018 Honoree</div><div class="hcard-name">Grant F. Muraski</div><div class="hcard-sub">Vigil Honor · Lodge #7</div></div>
+      </div>
+      <div class="hcard" onclick="showPage('bio-profile')">
+        <img src="http://www.moqua.org/wp-content/uploads/2018/11/Sublette-carousel-picture-1480x604.jpg" alt="Robert T. Sublette, Sr." />
+        <div class="hcard-body"><div class="hcard-yr">2018 Honoree</div><div class="hcard-name">Robert T. Sublette, Sr.</div><div class="hcard-sub">Vigil Honor · Lodge #7</div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="two-col">
+    <div class="about-blk">
+      <div class="about-rule"></div>
+      <h2 class="about-title">Leadership in Service</h2>
+      <p class="about-body">The watchwords of the Vigil Honor — not just an honor, but a call to even greater service. Owasippe Lodge #7 has answered this call since 1921. The Moqua Foundation preserves the stories of those who answered it most fully.</p>
+      <div class="tags">
+        <span class="tag">Owasippe Lodge #7</span><span class="tag">Order of the Arrow</span><span class="tag">Chicago Area Council</span><span class="tag">BSA</span>
+      </div>
+    </div>
+    <div class="event-blk">
+      <div class="ev-yr">2020</div>
+      <h3 class="ev-title">Vigil Alumni Annual Dinner</h3>
+      <div class="ev-meta">November 21, 2020<br>The Mayor's Mansion · Chicago<br>Fellowship 5:30 PM · Dinner 7:00 PM</div>
+      <div class="ev-hl">This year's honorees</div>
+      <div class="ev-name"><div class="ev-dot"></div><span class="ev-name-text">John P. Dozier</span></div>
+      <div class="ev-name"><div class="ev-dot"></div><span class="ev-name-text">Robert M. Ward</span></div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div><div class="ft-brand">Moqua Foundation</div><div class="ft-oa">Order of the Arrow · Owasippe Lodge #7 · Chicago Area Council · BSA</div></div>
+    <div class="ft-copy">© 2026 Moqua Foundation · All rights reserved</div>
+  </footer>
+</div>
+
+<!-- ============================================================
+     PAGE: ABOUT
+     ============================================================ -->
+<div id="page-about" class="page">
+  <div class="oa-band"><span class="oa-text">Order of the Arrow · Owasippe Lodge #7 · Chicago Area Council · BSA</span></div>
+  <nav class="main-nav">
+    <div class="nav-brand-wrap" onclick="showPage('home')">
+      <div class="nav-mark"><div class="nav-mark-inner"></div></div>
+      <div><div class="nav-name">Moqua Foundation</div><div class="nav-sub">Owasippe Lodge #7 · Since 1921</div></div>
+    </div>
+    <ul class="nav-links">
+      <li><a class="active" onclick="showPage('about')">About</a></li>
+      <li><a onclick="showPage('bio-index')">Biographies</a></li>
+      <li><a onclick="showPage('bio-index')">Centurions</a></li>
+      <li><a onclick="showPage('events')">Events</a></li>
+      <li><a onclick="showPage('guest-lodge')">Guest Lodge</a></li>
+      <li><a onclick="showPage('contact')">Contact</a></li>
+    </ul>
+  </nav>
+  <div class="page-header">
+    <div class="breadcrumb">Home · <span>About</span></div>
+    <h1 class="page-title">About the Moqua Foundation</h1>
+    <p class="page-sub">Preserving the legacy of Owasippe Lodge #7's Vigil Honor members since 1921.</p>
+  </div>
+  <div class="about-grid">
+    <div class="about-sidebar-nav">
+      <div class="sidebar-nav-label">In this section</div>
+      <a class="snav-item active">Mission &amp; History</a>
+      <a class="snav-item">What is the Vigil Honor?</a>
+      <a class="snav-item">About Owasippe Lodge #7</a>
+      <a class="snav-item">About the Foundation</a>
+    </div>
+    <div class="about-content">
+      <div class="eyebrow">Mission &amp; History</div>
+      <h2 class="content-h2">Leadership in Service</h2>
+      <div class="content-rule"></div>
+      <div class="mission-card">
+        <div class="mission-quote">"The watchwords of the Vigil Honor — a call to even greater service to others."</div>
+        <div class="mission-attr">Order of the Arrow · Vigil Honor</div>
+      </div>
+      <div class="content-body">
+        <p>The Moqua Foundation honors the men of Owasippe Lodge #7 who received the Vigil Honor — Scouting's highest recognition within the Order of the Arrow, awarded to those who have rendered distinguished service to Scouting and demonstrated an exceptional commitment to cheerful service.</p>
+        <p>Owasippe Lodge #7 has operated in support of the Chicago Area Council, Boy Scouts of America since 1921 — making it one of the oldest continuously operating OA lodges in the country. The lodge is home to Owasippe Scout Reservation, a 4,000-acre property in Michigan that has shaped the lives of hundreds of thousands of Chicago-area Scouts.</p>
+      </div>
+      <div class="info-grid">
+        <div class="info-card"><div class="ic-label">Founded</div><div class="ic-title">Owasippe Lodge #7</div><div class="ic-body">Established 1921 under the Chicago Area Council, BSA. One of the nation's oldest OA lodges.</div></div>
+        <div class="info-card"><div class="ic-label">The Vigil Honor</div><div class="ic-title">Scouting's Highest OA Honor</div><div class="ic-body">Awarded to Arrowmen who have rendered distinguished service above and beyond their position.</div></div>
+        <div class="info-card"><div class="ic-label">Honored members</div><div class="ic-title">31 Vigil Honorees</div><div class="ic-body">The Foundation has commemorated 31 Vigil Honor members across 10+ annual dinners.</div></div>
+        <div class="info-card"><div class="ic-label">Annual event</div><div class="ic-title">Vigil Alumni Dinner</div><div class="ic-body">Held each November in Chicago. Open to all Vigil alumni and their guests.</div></div>
+      </div>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <div><div class="ft-brand">Moqua Foundation</div><div class="ft-oa">Order of the Arrow · Owasippe Lodge #7 · Chicago Area Council · BSA</div></div>
+    <div class="ft-copy">© 2026 Moqua Foundation</div>
+  </footer>
+</div>
+
+<!-- ============================================================
+     PAGE: BIO INDEX
+     ============================================================ -->
+<div id="page-bio-index" class="page">
+  <div class="oa-band"><span class="oa-text">Order of the Arrow · Owasippe Lodge #7 · Chicago Area Council · BSA</span></div>
+  <nav class="main-nav">
+    <div class="nav-brand-wrap" onclick="showPage('home')">
+      <div class="nav-mark"><div class="nav-mark-inner"></div></div>
+      <div><div class="nav-name">Moqua Foundation</div><div class="nav-sub">Owasippe Lodge #7 · Since 1921</div></div>
+    </div>
+    <ul class="nav-links">
+      <li><a onclick="showPage('about')">About</a></li>
+      <li><a class="active" onclick="showPage('bio-index')">Biographies</a></li>
+      <li><a onclick="showPage('bio-index')">Centurions</a></li>
+      <li><a onclick="showPage('events')">Events</a></li>
+      <li><a onclick="showPage('guest-lodge')">Guest Lodge</a></li>
+      <li><a onclick="showPage('contact')">Contact</a></li>
+    </ul>
+  </nav>
+  <div class="page-header">
+    <div class="breadcrumb">Home · <span>Biographies</span></div>
+    <div style="display:flex;align-items:flex-end;justify-content:space-between">
+      <div><h1 class="page-title">Vigil Honor Biographies</h1><p class="page-sub">The men of Owasippe Lodge #7 honored for a lifetime of cheerful service.</p></div>
+      <div style="text-align:right"><div style="font-family:'Roboto Slab',serif;font-size:48px;font-weight:700;color:rgba(255,255,255,.15);line-height:1">24</div><div style="font-family:'Roboto Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.35)">Honored members</div></div>
+    </div>
+  </div>
+  <div class="filter-bar">
+    <span class="filter-label">Filter:</span>
+    <button class="filter-btn active">All</button>
+    <button class="filter-btn">Vigil name listed</button>
+    <button class="filter-btn">2015–2020</button>
+    <button class="filter-btn">Pre-2015</button>
+  </div>
+  <section class="bio-grid-section">
+    <div class="bio-grid" id="bio-grid-container"></div>
+  </section>
+  <footer class="site-footer">
+    <div><div class="ft-brand">Moqua Foundation</div><div class="ft-oa">Order of the Arrow · Owasippe Lodge #7 · Chicago Area Council · BSA</div></div>
+    <div class="ft-copy">© 2026 Moqua Foundation</div>
+  </footer>
+</div>
+
+<!-- ============================================================
+     PAGE: BIO PROFILE
+     ============================================================ -->
+<div id="page-bio-profile" class="page">
+  <div class="oa-band"><span class="oa-text">Order of the Arrow · Owasippe Lodge #7 · Chicago Area Council · BSA</span></div>
+  <nav class="main-nav">
+    <div class="nav-brand-wrap" onclick="showPage('home')">
+      <div class="nav-mark"><div class="nav-mark-inner"></div></div>
+      <div><div class="nav-name">Moqua Foundation</div><div class="nav-sub">Owasippe Lodge #7 · Since 1921</div></div>
+    </div>
+    <ul class="nav-links">
+      <li><a onclick="showPage('about')">About</a></li>
+      <li><a class="active" onclick="showPage('bio-index')">Biographies</a></li>
+      <li><a onclick="showPage('bio-index')">Centurions</a></li>
+      <li><a onclick="showPage('events')">Events</a></li>
+      <li><a onclick="showPage('guest-lodge')">Guest Lodge</a></li>
+      <li><a onclick="showPage('contact')">Contact</a></li>
+    </ul>
+  </nav>
+  <div id="bio-profile-content"></div>
+  <footer class="site-footer">
+    <div><div class="ft-brand">Moqua Foundation</div><div class="ft-oa">Order of the Arrow · Owasippe Lodge #7 · Chicago Area Council · BSA</div></div>
+    <div class="ft-copy">© 2026 Moqua Foundation</div>
+  </footer>
+</div>
+
+<!-- ============================================================
+     PAGE: EVENTS ARCHIVE
+     ============================================================ -->
+<div id="page-events" class="page">
+  <div class="oa-band"><span class="oa-text">Order of the Arrow · Owasippe Lodge #7 · Chicago Area Council · BSA</span></div>
+  <nav class="main-nav">
+    <div class="nav-brand-wrap" onclick="showPage('home')">
+      <div class="nav-mark"><div class="nav-mark-inner"></div></div>
+      <div><div class="nav-name">Moqua Foundation</div><div class="nav-sub">Owasippe Lodge #7 · Since 1921</div></div>
+    </div>
+    <ul class="nav-links">
+      <li><a onclick="showPage('about')">About</a></li>
+      <li><a onclick="showPage('bio-index')">Biographies</a></li>
+      <li><a onclick="showPage('bio-index')">Centurions</a></li>
+      <li><a class="active" onclick="showPage('events')">Events</a></li>
+      <li><a onclick="showPage('guest-lodge')">Guest Lodge</a></li>
+      <li><a onclick="showPage('contact')">Contact</a></li>
+    </ul>
+  </nav>
+  <div class="page-header">
+    <div class="breadcrumb">Home · <span>Events</span></div>
+    <h1 class="page-title">Vigil Alumni Annual Dinners</h1>
+    <p class="page-sub">A record of the annual dinners honoring the Vigil members of Owasippe Lodge #7.</p>
+  </div>
+  <section class="timeline-section">
+    <div style="margin-bottom:28px"><div style="font-family:'Roboto Slab',serif;font-size:18px;font-weight:700;color:var(--blue)">Dinner Archive · 2015–2020</div><div style="font-size:12px;font-weight:300;color:var(--gray-lt);margin-top:3px">All held at the European Chalet Banquet Hall · 5445 S. Harlem Ave, Chicago</div></div>
+    <div id="events-timeline"></div>
+  </section>
+  <div class="legacy-section">
+    <div><div style="font-family:'Roboto Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gray-lt);margin-bottom:3px">Historical archive</div><div class="legacy-title">2010–2014 Photo Galleries</div><div class="legacy-sub">Earlier dinner years — gallery photos only, no event detail pages.</div></div>
+    <span class="btn-outline">View legacy galleries →</span>
+  </div>
+  <footer class="site-footer">
+    <div><div class="ft-brand">Moqua Foundation</div><div class="ft-oa">Order of the Arrow · Owasippe Lodge #7 · Chicago Area Council · BSA</div></div>
+    <div class="ft-copy">© 2026 Moqua Foundation</div>
+  </footer>
+</div>
+
+<!-- ============================================================
+     PAGE: EVENT DETAIL
+     ============================================================ -->
+<div id="page-event-detail" class="page">
+  <div class="oa-band"><span class="oa-text">Order of the Arrow · Owasippe Lodge #7 · Chicago Area Council · BSA</span></div>
+  <nav class="main-nav">
+    <div class="nav-brand-wrap" onclick="showPage('home')">
+      <div class="nav-mark"><div class="nav-mark-inner"></div></div>
+      <div><div class="nav-name">Moqua Foundation</div><div class="nav-sub">Owasippe Lodge #7 · Since 1921</div></div>
+    </div>
+    <ul class="nav-links">
+      <li><a onclick="showPage('about')">About</a></li>
+      <li><a onclick="showPage('bio-index')">Biographies</a></li>
+      <li><a onclick="showPage('bio-index')">Centurions</a></li>
+      <li><a class="active" onclick="showPage('events')">Events</a></li>
+      <li><a onclick="showPage('guest-lodge')">Guest Lodge</a></li>
+      <li><a onclick="showPage('contact')">Contact</a></li>
+    </ul>
+  </nav>
+  <div id="event-detail-content"></div>
+  <footer class="site-footer">
+    <div><div class="ft-brand">Moqua Foundation</div><div class="ft-oa">Order of the Arrow · Owasippe Lodge #7 · Chicago Area Council · BSA</div></div>
+    <div class="ft-copy">© 2026 Moqua Foundation</div>
+  </footer>
+</div>
+
+<!-- ============================================================
+     PAGE: GUEST LODGE
+     ============================================================ -->
+<div id="page-guest-lodge" class="page">
+  <div class="oa-band"><span class="oa-text">Order of the Arrow · Owasippe Lodge #7 · Chicago Area Council · BSA</span></div>
+  <nav class="main-nav">
+    <div class="nav-brand-wrap" onclick="showPage('home')">
+      <div class="nav-mark"><div class="nav-mark-inner"></div></div>
+      <div><div class="nav-name">Moqua Foundation</div><div class="nav-sub">Owasippe Lodge #7 · Since 1921</div></div>
+    </div>
+    <ul class="nav-links">
+      <li><a onclick="showPage('about')">About</a></li>
+      <li><a onclick="showPage('bio-index')">Biographies</a></li>
+      <li><a onclick="showPage('bio-index')">Centurions</a></li>
+      <li><a onclick="showPage('events')">Events</a></li>
+      <li><a class="active" onclick="showPage('guest-lodge')">Guest Lodge</a></li>
+      <li><a onclick="showPage('contact')">Contact</a></li>
+    </ul>
+  </nav>
+  <div class="lodge-hero">
+    <div class="lodge-hero-text">
+      <div class="breadcrumb">Home · <span>Guest Lodge</span></div>
+      <h1 class="lodge-title">Owasippe Guest Lodge</h1>
+      <p class="lodge-sub">A project to restore and preserve a premier lodging facility at Owasippe Scout Reservation — connecting generations of Scouts to the camp they love.</p>
+    </div>
+    <div class="lodge-hero-img">
+      <img src="http://www.moqua.org/wp-content/uploads/2018/11/Owasippe-Lodge-7-Chiefs-11-17-2018-carousel-1480x604.jpg" alt="Owasippe Scout Reservation" />
+    </div>
+  </div>
+  <div class="status-bar">
+    <div class="status-badge"><div class="status-dot"></div><span class="status-text">Project Active</span></div>
+    <span style="font-family:'Roboto Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4)">Owasippe Scout Reservation · Michigan</span>
+  </div>
+  <div class="with-sidebar">
+    <div class="lodge-content">
+      <div class="eyebrow">Project Overview</div>
+      <div class="sec-title">About the Guest Lodge</div>
+      <div class="lodge-text">
+        <p>Owasippe is home. For generations of Chicago-area Scouts, the reservation in Michigan has been the place where they first paddled a canoe, hiked a trail, and earned a merit badge under the open sky. The Guest Lodge project exists to keep that connection alive for the next generation.</p>
+        <p>The Owasippe Staff Association and the Chicago Area Council have been working to restore and complete a premier lodging facility at Owasippe Scout Reservation. Your support helps ensure that Scouts — and the adult volunteers who serve them — have a welcoming, quality home base at camp.</p>
+        <p>In addition to volunteer time, financial support is critical to completing the project and moving on to the next phase of improvements at the reservation.</p>
+      </div>
+      <div class="eyebrow">Gallery</div>
+      <div class="sec-title">Lodge Photos</div>
+      <div class="gallery-preview">
+        <div class="gallery-thumb"><img src="http://www.moqua.org/wp-content/uploads/2018/11/Owasippe-Lodge-7-Chiefs-11-17-2018-carousel-1480x604.jpg" alt="" /></div>
+        <div class="gallery-thumb"><img src="http://www.moqua.org/wp-content/uploads/2019/11/Vigil-Dinner-Group-11-23-2019-carousel-1480x604.jpg" alt="" /></div>
+        <div class="gallery-thumb"><img src="http://www.moqua.org/wp-content/uploads/2018/11/Muraski-carousel-picture-1480x604.jpg" alt="" /></div>
+        <div class="gallery-more"><div class="gallery-more-n">+12</div></div>
+      </div>
+    </div>
+    <div class="sidebar">
+      <div class="donate-card">
+        <div class="donate-label">Support the project</div>
+        <div class="donate-title">Help complete the Guest Lodge</div>
+        <div class="donate-body">Your financial support directly funds the restoration and completion of this important facility at Owasippe Scout Reservation.</div>
+        <div class="donate-btn">Make a donation →</div>
+      </div>
+      <div class="info-blk"><div class="info-blk-label">Also support</div><div class="info-blk-title">Friends of Scouting</div><div class="info-blk-body">Help the Chicago Area Council fulfill its mission to the youth of Chicago and get them to Owasippe.</div></div>
+      <div style="margin-top:16px">
+        <div class="sidebar-label">Project facts</div>
+        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)"><span style="font-family:'Roboto Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--gray-lt)">Location</span><span style="font-family:'Roboto Slab',serif;font-size:12px;font-weight:700;color:var(--ink)">Owasippe, MI</span></div>
+        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)"><span style="font-family:'Roboto Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--gray-lt)">Council</span><span style="font-family:'Roboto Slab',serif;font-size:12px;font-weight:700;color:var(--ink)">Chicago Area</span></div>
+        <div style="display:flex;justify-content:space-between;padding:8px 0"><span style="font-family:'Roboto Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--gray-lt)">Partners</span><span style="font-family:'Roboto Slab',serif;font-size:12px;font-weight:700;color:var(--ink)">OSA · CAC · BSA</span></div>
+      </div>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <div><div class="ft-brand">Moqua Foundation</div><div class="ft-oa">Order of the Arrow · Owasippe Lodge #7 · Chicago Area Council · BSA</div></div>
+    <div class="ft-copy">© 2026 Moqua Foundation</div>
+  </footer>
+</div>
+
+<!-- ============================================================
+     PAGE: CONTACT
+     ============================================================ -->
+<div id="page-contact" class="page">
+  <div class="oa-band"><span class="oa-text">Order of the Arrow · Owasippe Lodge #7 · Chicago Area Council · BSA</span></div>
+  <nav class="main-nav">
+    <div class="nav-brand-wrap" onclick="showPage('home')">
+      <div class="nav-mark"><div class="nav-mark-inner"></div></div>
+      <div><div class="nav-name">Moqua Foundation</div><div class="nav-sub">Owasippe Lodge #7 · Since 1921</div></div>
+    </div>
+    <ul class="nav-links">
+      <li><a onclick="showPage('about')">About</a></li>
+      <li><a onclick="showPage('bio-index')">Biographies</a></li>
+      <li><a onclick="showPage('bio-index')">Centurions</a></li>
+      <li><a onclick="showPage('events')">Events</a></li>
+      <li><a onclick="showPage('guest-lodge')">Guest Lodge</a></li>
+      <li><a class="active" onclick="showPage('contact')">Contact</a></li>
+    </ul>
+  </nav>
+  <div class="page-header">
+    <div class="breadcrumb">Home · <span>Contact</span></div>
+    <h1 class="page-title">Get in Touch</h1>
+    <p class="page-sub">Questions about the Foundation, the annual dinner, or how to support the Guest Lodge project.</p>
+  </div>
+  <div class="with-sidebar">
+    <div class="contact-form-area">
+      <div class="eyebrow">Contact form</div>
+      <h2 style="font-family:'Roboto Slab',serif;font-size:22px;font-weight:700;color:var(--blue);margin-bottom:20px">Send us a message</h2>
+      <div class="form-grid">
+        <div class="form-group"><label class="form-label">First name <span>*</span></label><input class="form-input" type="text" placeholder="First name" /></div>
+        <div class="form-group"><label class="form-label">Last name <span>*</span></label><input class="form-input" type="text" placeholder="Last name" /></div>
+        <div class="form-group"><label class="form-label">Email address <span>*</span></label><input class="form-input" type="email" placeholder="your@email.com" /></div>
+        <div class="form-group"><label class="form-label">Subject</label>
+          <select class="form-select">
+            <option>Annual Dinner inquiry</option>
+            <option>Biography correction or addition</option>
+            <option>Guest Lodge donation</option>
+            <option>General question</option>
+          </select>
+        </div>
+        <div class="form-group form-full"><label class="form-label">Message <span>*</span></label><textarea class="form-input form-textarea" placeholder="Your message…"></textarea></div>
+        <div class="form-full"><button class="btn-blue">Send message</button></div>
+      </div>
+      <p class="form-note">* Required fields. Your information will not be shared or sold.</p>
+    </div>
+    <div class="sidebar">
+      <div class="mailing-card">
+        <div class="mailing-label">Stay connected</div>
+        <div class="mailing-title">Join the mailing list</div>
+        <div class="mailing-body">Receive announcements about the annual dinner, new biographies, and Foundation news.</div>
+        <input class="mailing-input" type="email" placeholder="Your email address" />
+        <button class="mailing-btn">Subscribe →</button>
+      </div>
+      <div class="contact-info-blk"><div class="cib-label">Annual dinner</div><div class="cib-title">Vigil Alumni Dinner</div><div class="cib-body">Held each November. Contact us to be added to the invitation list or to inquire about table reservations.</div></div>
+      <div class="contact-info-blk"><div class="cib-label">Submissions</div><div class="cib-title">Corrections &amp; additions</div><div class="cib-body">Have additional photos or biographical information about an honoree? We welcome contributions to the archive.</div></div>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <div><div class="ft-brand">Moqua Foundation</div><div class="ft-oa">Order of the Arrow · Owasippe Lodge #7 · Chicago Area Council · BSA</div></div>
+    <div class="ft-copy">© 2026 Moqua Foundation</div>
+  </footer>
+</div>
+
+<!-- ============================================================
+     DATA + JAVASCRIPT
+     ============================================================ -->
+<script>
+// ---- DATA ----
+const bios = [
+  {name:"Frank S. Accardi",vigil:"Nenostam Moewagan",trans:"To Show Understanding",year:"2016",img:"http://www.moqua.org/wp-content/uploads/2016/09/Frank-Accardi-1965-202x300.jpg",bio:"Frank Samuel Accardi was born on October 23, 1927 at home in the upstairs apartment of an Italian import store at 710 W. Grand Avenue in Chicago. His parents Michael and Josephine were immigrants from Italy. Frank is one of seven children and the family soon moved to Frank's childhood home at 3530 W. Hirsch St. and joined Maternity BVM Parish. Frank's involvement in Scouting began early, and his dedication to the program spanned decades of active leadership and service within the Chicago Area Council. He earned the Vigil Honor for his distinguished contributions to Owasippe Lodge #7.",born:"October 23, 1927"},
+  {name:"Jack B. Blane",vigil:"Wulapeju",trans:"Just and Upright One",year:"2012",img:"http://www.moqua.org/wp-content/uploads/2012/03/Jack-B.-Blane-circa-1938-revised-257x300.jpg",bio:"Jack B. Blane was born on May 20, 1923 on the Southside of Chicago. He attended the Isabelle C. O'Keeffe Elementary School and joined Boy Scout Troop 557 in 1935 at age 12. During his time as a Scout he rose through the ranks of leadership. Jack earned the Vigil Honor for his decades of service to Scouting and to Owasippe Lodge #7.",born:"May 20, 1923"},
+  {name:"Lawrence S. Branch",vigil:"",trans:"",year:"2011",img:"http://www.moqua.org/wp-content/uploads/2011/10/Lawrence-S.-Branch-11-20-20101.jpg",bio:"Lawrence S. Branch was born on Chicago's Southside in the West Woodlawn neighborhood on August 27, 1914 to Emil and Sara Branch. Larry joined Boy Scout Troop 541 sponsored by the Lincoln Memorial Congregational Church and developed a lifelong commitment to Scouting and the youth of Chicago.",born:"August 27, 1914"},
+  {name:"Frederick C. Brems",vigil:"Wulamollessohalid",trans:"He Who Makes Me Happy",year:"2011",img:"http://www.moqua.org/wp-content/uploads/2011/10/Frederick-C.-Brems-1940-Camp-Twin-Echos-Ligonier-PA-09-01-1940-profile-revised-137x300.jpg",bio:"Frederick Charles Brems was born on January 2, 1919 at St. Mary's Hospital in Chicago. He attended St. Genevieve Church Grammar School and DePaul Academy High School. Fred's Scouting career began as a Charter Member of Troop 150 sponsored by St. Genevieve's Holy Name Society.",born:"January 2, 1919"},
+  {name:"John N. Brown",vigil:"Gunaquot Cuwe",trans:"Tall Pine Tree",year:"2016",img:"http://www.moqua.org/wp-content/uploads/2016/10/John-Brown-High-School-1952-262x300.jpg",bio:"John Norman Brown was born on Saturday January 13, 1934 at Cook County Hospital. An only child, he grew up in the West Woodlawn neighborhood of Chicago. Upon graduating from the McCosh elementary school he went on to attend and graduate from Englewood High School.",born:"January 13, 1934"},
+  {name:"Norman C. Buettner",vigil:"Wipungweu Psakulin",trans:"Brown Squirrel",year:"2011",img:"http://www.moqua.org/wp-content/uploads/2011/10/Norman-C.-Buettner-1965-300x200.jpg",bio:"Norman C. Buettner was born on Wednesday November 24, 1937 at the Lewis Memorial Maternity Hospital in Chicago, the second son of Herman and Agnes Buettner. He attended St. Christina Grammar School and completed his studies at St. Willibrord. Norm's connection to Owasippe Scout Reservation was a defining part of his Scouting career.",born:"November 24, 1937"},
+  {name:"Robert J. Burns",vigil:"Wetochwink Woapalanne",trans:"Father of Eagles",year:"2013",img:"http://www.moqua.org/wp-content/uploads/2013/09/Bob-Burns-portrait-circa-1940.jpg",bio:"Robert J. Burns was born on March 12, 1928 at the St. Luke's Hospital in Chicago. Due to the Great Depression and hardships at home, Bob became a Ward of the State shortly after birth. His Scouting journey transformed his life and he went on to become a dedicated leader within Owasippe Lodge #7.",born:"March 12, 1928"},
+  {name:"Norville R. Carter",vigil:"Elenapewian",trans:"Thou Indian!",year:"2017",img:"http://www.moqua.org/wp-content/uploads/2017/10/Norville-Carter-circa-1954-247x300.jpg",bio:"Norville was the first born of three siblings, born February 6, 1938 at home at 5233 S. Prairie Avenue in Chicago. Norville grew up on Chicago's Southside, attending the Burke School and Englewood High School, where he graduated as the Battalion Commander of ROTC.",born:"February 6, 1938"},
+  {name:"Frank G. Collins",vigil:"Wowoatam Chesimus",trans:"Skillful Younger Brother",year:"2015",img:"http://www.moqua.org/wp-content/uploads/2015/09/Frank-Collins-circa-1955-819x1024.jpg",bio:"Frank G. Collins was born on February 20, 1938. The family lived at 5543 S. Dorchester Ave. on Chicago's southside. Frank attended the Ray Elementary School and graduated from Hyde Park High School in 1956. As a Cub Scout in his mother's Den, Frank was ready to hit the Scouting trail early.",born:"February 20, 1938"},
+  {name:"John L. Cook",vigil:"Papenauwelendam",trans:"To Be Concerned",year:"2011",img:"http://www.moqua.org/wp-content/uploads/2011/10/young-mr-cook-modified-230x300.jpg",bio:"Papenauwelendam — To Be Concerned. The Lenni Lenape name bestowed upon Mr. John Cook by Owasippe Lodge on August 1, 1966 on the occasion of his Vigil induction. Brother John began his Scouting journey as an Assistant Scoutmaster and went on to dedicate decades of service to the youth of Chicago.",born:""},
+  {name:"Dwaine W. Filkins",vigil:"The Good Worker",trans:"",year:"2014",img:"http://www.moqua.org/wp-content/uploads/2014/08/Dwaine-Filkins-1940-Twin-Echos-cropped-revised.jpg",bio:"Dwaine Wiley and his twin brother, Dwight Allen, were born on November 12, 1914 in Oquawka, Illinois. Later, Earl LeRoy Filkins and Jennie Charlotte Filkins adopted Dwaine and his siblings. His dedication to Scouting earned him the Vigil name The Good Worker.",born:"November 12, 1914"},
+  {name:"James G. Heinlein",vigil:"Schipinachagen",trans:"To Put Forth The Hand Willingly",year:"2017",img:"http://www.moqua.org/wp-content/uploads/2017/10/Jim-Heinlein-youth-270x300.jpg",bio:"James G. Heinlein was born on Friday February 8, 1935 — the 25th Anniversary to the day that the United States Congress granted a charter to the Boy Scouts of America. Jim entered the world at St. Anne's Hospital in Chicago to parents George and Mildred Heinlein.",born:"February 8, 1935"},
+  {name:"Rev. John M. Kaserow",vigil:"",trans:"",year:"2015",img:"http://www.moqua.org/wp-content/uploads/2015/09/John-M-Kaserow-1955-819x1024.jpg",bio:"John Marion Kaserow was born in Chicago, Illinois on May 6, 1938. John graduated from St. Hyacinth Grammar School and Archbishop Weber High School. He went on to be ordained as a Catholic priest and served the youth of Chicago both through his ministry and through Scouting.",born:"May 6, 1938"},
+  {name:"Robert H. Krejci",vigil:"",trans:"",year:"2011",img:"http://www.moqua.org/wp-content/uploads/2011/10/Robert-H.-Krejci-FJP-10-08-2011-300x200.jpg",bio:"Robert H. Krejci was born at home on Chicago's Westside on June 4, 1913. Bob attended the Herbert Spencer Grammar School and Austin High School, then completed his course of study at Michigan State College. He dedicated decades to Scouting and to Owasippe Lodge #7.",born:"June 4, 1913"},
+  {name:"Grant F. Muraski",vigil:"",trans:"",year:"2018",img:"http://www.moqua.org/wp-content/uploads/2018/10/Grant-Muraski-as-a-youth-240x300.jpg",bio:"Grant Francis Muraski was born on May 05, 1939 to Joseph F. Muraski and Lillian Muraski at home on the Northwest side of Chicago. He was the fifth of seven children. Grant attended Our Lady of Grace Grammar School and Lane Tech High School and joined Scouting as a young man.",born:"May 5, 1939"},
+  {name:"Arties R. Phillips, Jr.",vigil:"",trans:"",year:"2013",img:"http://www.moqua.org/wp-content/uploads/2013/09/Phillips-circa-1940.jpg",bio:"Arties Phillips was born on February 4, 1928 in Chicago at St. Luke's Hospital to Arties R. Phillips Sr. and Ruby Lee Phillips. The family lived on Chicago's South Side in the Woodlawn area. Young Arties attended the McCosh Elementary School and then Englewood High School.",born:"February 4, 1928"},
+  {name:"Daniel J. Reilly III",vigil:"",trans:"",year:"2012",img:"http://www.moqua.org/wp-content/uploads/2012/03/Daniel-J.-Reilly-1938-revised.jpg",bio:"Daniel J. Reilly, III was born on May 21, 1920 at St. Mary's Hospital in Buffalo, NY. His father received his Law Degree from Cornell University after serving as an Infantry Captain in WWI. The trail of Scouting started on Dan's 12th birthday in 1932 with Troop 44 in Erie, PA.",born:"May 21, 1920"},
+  {name:"John Sanchez, Sr.",vigil:"",trans:"",year:"2014",img:"http://www.moqua.org/wp-content/uploads/2014/11/John-Sanchez-circa-2003a.jpg",bio:"John Sanchez, Sr. was born on Tuesday August 15, 1928 in Chicago, IL. He attended St. Mary's Grammar School and graduated from Tilden Tech High School in 1946. John's lifelong dedication to Scouting and to the youth of Chicago earned him the Vigil Honor.",born:"August 15, 1928"},
+  {name:"Rev. F. Gerald Scanlan",vigil:"",trans:"",year:"2019",img:"http://www.moqua.org/wp-content/uploads/2019/11/Fr-Jerry-Scanlan-HS-Graduation-Photo-1954.jpg",bio:"Francis Gerald Scanlan was born on September 15, 1935 at Ravenswood Hospital. Jerry heard the calling of the faith early and went immediately into Quigley Preparatory Seminary after grammar school. After five years he entered Saint Mary of the Lake Seminary, was ordained a Catholic priest in 1961, and went on to serve as an Eagle Scout and Scout chaplain.",born:"September 15, 1935"},
+  {name:"Arnold R. Schenk",vigil:"Achpamsin",trans:"To Walk About",year:"2011",img:"http://www.moqua.org/wp-content/uploads/2011/10/Arn-Schenk-circa-1936.jpg",bio:"Arnold R. Schenk was born on May 23, 1918 at home in the Roseland neighborhood of Chicago. His father was a Chicago Public School teacher and later Principal of the Dixon Elementary School. Arn attended the Esmond Grammar School and graduated from Morgan Park High School in 1935.",born:"May 23, 1918"},
+  {name:"Samuel C. Stanton, MD",vigil:"",trans:"",year:"2011",img:"http://www.moqua.org/wp-content/uploads/2011/11/Stanton-Miller-1939.jpg",bio:"Samuel Cecil Stanton was born on June 28, 1856 in Newtonville, MA. At age 7 he met President Abraham Lincoln via an introduction through his cousin Edwin M. Stanton, then Attorney General of Ohio. Dr. Stanton entered the University of Illinois in 1872 and went on to a distinguished career in medicine and service.",born:"June 28, 1856"},
+  {name:"Donald E. Studaven",vigil:"",trans:"",year:"2014",img:"http://www.moqua.org/wp-content/uploads/2014/08/Donald-Studaven-05-1982.jpg",bio:"Donald Eclare Studaven was born on December 14, 1933 on Chicago's West Side. Tragically, his mother died shortly before his 5th birthday. Don was raised by his aunt and uncle. He attended Thomas Jefferson Elementary School and graduated from the Richard T. Crane Technical High School.",born:"December 14, 1933"},
+  {name:"Robert T. Sublette, Sr.",vigil:"",trans:"",year:"2018",img:"http://www.moqua.org/wp-content/uploads/2018/10/Bob-Sublette-as-a-youth-240x300.jpg",bio:"Robert Thomas Sublette was born in Chattanooga, Tennessee August 5, 1937. The family moved to Chicago in the early 1940's. Bob attended the Beidler Grammar School and was its first African American student. He then attended and graduated from DuSable High School.",born:"August 5, 1937"},
+  {name:"Ronald J. Temple, Ph.D.",vigil:"Elachtoniket",trans:"The Seeker",year:"2019",img:"http://www.moqua.org/wp-content/uploads/2019/11/Ron-Temple-with-Edson-and-Goodman-1960-816x1024.jpg",bio:"Ronald Jacob Temple was born on September 10, 1940 to Jacob and Maggie Temple. The family initially lived at 2849 W. Warren Blvd., Chicago and later moved to Maywood. Ron attended Beidler and Marshall Elementary schools and Marshall High School in Chicago. While in elementary school, Ron initially joined a small troop in his neighborhood and quickly rose to leadership.",born:"September 10, 1940"}
+];
+
+const events = [
+  {year:"2020",date:"November 21, 2020",honorees:["John P. Dozier","Robert M. Ward"],venue:"The Mayor's Mansion (a.k.a. European Chalet Banquet Hall)",img:"http://www.moqua.org/wp-content/uploads/2019/11/Vigil-Dinner-Group-11-23-2019-carousel-1480x604.jpg"},
+  {year:"2019",date:"November 23, 2019",honorees:["Rev. F. Gerald Scanlan","Ronald J. Temple, Ph.D."],venue:"The Mayor's Mansion (a.k.a. European Chalet Banquet Hall)",img:"http://www.moqua.org/wp-content/uploads/2019/11/Vigil-Dinner-Group-11-23-2019-carousel-1480x604.jpg"},
+  {year:"2018",date:"November 17, 2018",honorees:["Grant F. Muraski","Robert T. Sublette, Sr."],venue:"European Chalet Banquet Hall",img:"http://www.moqua.org/wp-content/uploads/2018/11/Muraski-carousel-picture-1480x604.jpg"},
+  {year:"2017",date:"November 18, 2017",honorees:["Norville R. Carter","James G. Heinlein"],venue:"European Chalet Banquet Hall",img:"http://www.moqua.org/wp-content/uploads/2017/10/Norville-Carter-circa-1954-247x300.jpg"},
+  {year:"2016",date:"November 19, 2016",honorees:["Frank S. Accardi","John N. Brown"],venue:"European Chalet Banquet Hall",img:"http://www.moqua.org/wp-content/uploads/2016/09/Frank-Accardi-1965-202x300.jpg"},
+  {year:"2015",date:"November 21, 2015",honorees:["Frank G. Collins","Rev. John M. Kaserow"],venue:"European Chalet Banquet Hall",img:"http://www.moqua.org/wp-content/uploads/2015/09/Frank-Collins-circa-1955-819x1024.jpg"}
+];
+
+let currentBio = 0;
+let currentEvent = 0;
+
+// ---- PAGE ROUTER ----
+function showPage(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.proto-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+  document.querySelector(`.proto-btn[onclick="showPage('${page}')"]`).classList.add('active');
+  window.scrollTo(0,0);
+
+  if (page === 'bio-index') renderBioGrid();
+  if (page === 'bio-profile') renderBioProfile(currentBio);
+  if (page === 'events') renderEventsTimeline();
+  if (page === 'event-detail') renderEventDetail(currentEvent);
+}
+
+// ---- BIO GRID ----
+function renderBioGrid() {
+  const container = document.getElementById('bio-grid-container');
+  container.innerHTML = bios.map((b,i) => `
+    <div class="bio-card" onclick="openBio(${i})">
+      <img src="${b.img}" alt="${b.name}" onerror="this.style.background='#E9E9E4';this.src='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'" />
+      <div class="bio-card-body">
+        <div class="bio-card-name">${b.name}</div>
+        <div class="bio-card-vigil">${b.vigil || 'Vigil Honor'}</div>
+        <div class="bio-card-date">Honored ${b.year}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function openBio(i) {
+  currentBio = i;
+  showPage('bio-profile');
+}
+
+// ---- BIO PROFILE ----
+function renderBioProfile(i) {
+  const b = bios[i];
+  const prev = bios[(i - 1 + bios.length) % bios.length];
+  const next = bios[(i + 1) % bios.length];
+  document.getElementById('bio-profile-content').innerHTML = `
+    <div class="profile-hero">
+      <div class="profile-photo-col">
+        <img class="profile-photo" src="${b.img}" alt="${b.name}" />
+        <div class="profile-photo-caption">${b.name}</div>
+      </div>
+      <div class="profile-info-col">
+        <div class="profile-bc" onclick="showPage('bio-index')">Home · <span>Biographies</span> · ${b.name}</div>
+        <h1 class="profile-name">${b.name}</h1>
+        <div class="vigil-wrap">
+          <div class="vigil-badge"><span class="vigil-badge-text">Vigil Name</span></div>
+          <div>
+            <div class="vigil-name">${b.vigil || 'Vigil Honor'}</div>
+            ${b.trans ? `<div class="vigil-trans">"${b.trans}"</div>` : ''}
+          </div>
+        </div>
+        <div class="profile-meta-grid">
+          ${b.born ? `<div class="pmi"><div class="pmi-label">Born</div><div class="pmi-val">${b.born}</div></div>` : '<div class="pmi"><div class="pmi-label">Lodge</div><div class="pmi-val">Owasippe #7</div></div>'}
+          <div class="pmi"><div class="pmi-label">Honored</div><div class="pmi-val">${b.year} Dinner</div></div>
+          <div class="pmi"><div class="pmi-label">Lodge</div><div class="pmi-val">Owasippe #7</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="profile-body-area">
+      <div class="profile-content">
+        <div class="eyebrow">Biography</div>
+        <div class="sec-title">Life &amp; Service</div>
+        <div class="bio-text">
+          <p>${b.bio}</p>
+        </div>
+      </div>
+      <div class="profile-sidebar">
+        <div class="sidebar-label" style="margin-bottom:14px">Record</div>
+        <div class="sidebar-fact"><div class="sf-key">Full name</div><div class="sf-val">${b.name}</div></div>
+        ${b.born ? `<div class="sidebar-fact"><div class="sf-key">Born</div><div class="sf-val">${b.born}</div></div>` : ''}
+        ${b.vigil ? `<div class="sidebar-fact"><div class="sf-key">Vigil name</div><div class="sf-val">${b.vigil}</div></div>` : ''}
+        ${b.trans ? `<div class="sidebar-fact"><div class="sf-key">Meaning</div><div class="sf-val">${b.trans}</div></div>` : ''}
+        <div class="sidebar-fact"><div class="sf-key">Honored at</div><div class="sf-val">${b.year} Annual Dinner</div></div>
+        <div class="sidebar-fact"><div class="sf-key">Lodge</div><div class="sf-val">Owasippe Lodge #7</div></div>
+        <div style="margin-top:20px">
+          <div class="sidebar-label" style="margin-bottom:10px">Other honorees</div>
+          <div class="sidebar-next-card" onclick="openBio(${(i-1+bios.length)%bios.length})">
+            <img src="${prev.img}" alt="${prev.name}" style="width:42px;height:50px;object-fit:cover;border-radius:2px;flex-shrink:0" />
+            <div><div class="snc-label">← Previous</div><div class="snc-name">${prev.name}</div></div>
+          </div>
+          <div class="sidebar-next-card" onclick="openBio(${(i+1)%bios.length})">
+            <img src="${next.img}" alt="${next.name}" style="width:42px;height:50px;object-fit:cover;border-radius:2px;flex-shrink:0" />
+            <div><div class="snc-label">Next →</div><div class="snc-name">${next.name}</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// ---- EVENTS TIMELINE ----
+function renderEventsTimeline() {
+  const container = document.getElementById('events-timeline');
+  container.innerHTML = events.map((e,i) => `
+    <div class="dinner-row">
+      <div class="dinner-year-col">
+        <div class="year-node"></div>
+        <div class="year-label">${e.year}</div>
+      </div>
+      <div class="dinner-card" onclick="openEvent(${i})">
+        <img class="dinner-card-img" src="${e.img}" alt="${e.year} Dinner" />
+        <div class="dinner-card-body">
+          <div>
+            <div class="dc-date">${e.date}</div>
+            <div class="dc-title">${e.year} Vigil Alumni Dinner</div>
+            <div class="dc-venue">${e.venue} · Chicago</div>
+            <div class="dc-hl">Honorees</div>
+            <div class="dc-chips">${e.honorees.map(h=>`<span class="dc-chip">${h}</span>`).join('')}</div>
+          </div>
+          <div class="dc-link" style="margin-top:12px">View dinner details &amp; photos →</div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function openEvent(i) {
+  currentEvent = i;
+  showPage('event-detail');
+}
+
+// ---- EVENT DETAIL ----
+function renderEventDetail(i) {
+  const e = events[i];
+  const prev = events[(i+1) % events.length];
+  const next = events[(i-1+events.length) % events.length];
+
+  // Find honoree bios
+  const honoreeData = e.honorees.map(name => bios.find(b => b.name === name)).filter(Boolean);
+  const honoreeCards = honoreeData.map((b, bi) => {
+    const bioIdx = bios.indexOf(b);
+    return `
+      <div class="hf-card" onclick="openBio(${bioIdx})">
+        <img class="hf-img" src="${b.img}" alt="${b.name}" />
+        <div class="hf-body">
+          <div class="hf-yr">${e.year} Honoree</div>
+          <div class="hf-name">${b.name}</div>
+          <div class="hf-vigil">${b.vigil || 'Vigil Honor'}</div>
+          <div class="hf-link">Read biography →</div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  // Fallback cards for honorees not in bios data (e.g. Dozier, Ward)
+  const fallbackCards = e.honorees.filter(name => !bios.find(b => b.name === name)).map(name => `
+    <div class="hf-card">
+      <div class="hf-img" style="background:var(--blue-lt);display:flex;align-items:center;justify-content:center;"><span style="font-family:'Roboto Condensed',sans-serif;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gray-lt)">Photo TBD</span></div>
+      <div class="hf-body">
+        <div class="hf-yr">${e.year} Honoree</div>
+        <div class="hf-name">${name}</div>
+        <div class="hf-vigil">Vigil Honor</div>
+      </div>
+    </div>
+  `).join('');
+
+  document.getElementById('event-detail-content').innerHTML = `
+    <div class="event-hero">
+      <img class="event-hero-img" src="${e.img}" alt="${e.year} Vigil Dinner" />
+      <div class="event-hero-overlay">
+        <div>
+          <div class="breadcrumb" style="color:rgba(255,255,255,.45);margin-bottom:8px" onclick="showPage('events')">Home · <span style="color:rgba(255,255,255,.75);cursor:pointer">Events</span> · ${e.year} Annual Dinner</div>
+          <h1 class="event-title-hero">${e.year} Vigil Alumni<br>Annual Dinner</h1>
+          <div class="event-date-pill"><span class="event-date-pill-text">${e.date}</span></div>
+        </div>
+        <div class="event-yr-badge">${e.year}</div>
+      </div>
+    </div>
+    <div class="event-meta-bar">
+      <div class="emi"><div class="emi-label">Date</div><div class="emi-val">${e.date}</div><div class="emi-sub">Saturday evening</div></div>
+      <div class="emi"><div class="emi-label">Venue</div><div class="emi-val">The Mayor's Mansion</div><div class="emi-sub">5445 S. Harlem Ave, Chicago</div></div>
+      <div class="emi"><div class="emi-label">Cost</div><div class="emi-val">$40 per person</div><div class="emi-sub">Dinner included</div></div>
+      <div class="emi"><div class="emi-label">Honorees</div><div class="emi-val">${e.honorees.length} members</div><div class="emi-sub">${e.honorees.map(h=>h.split(' ').slice(-1)[0]).join(' · ')}</div></div>
+    </div>
+    <div class="with-sidebar" style="border-top:1px solid var(--border)">
+      <div class="event-content-area">
+        <div class="eyebrow">Vigil Honor</div>
+        <div class="sec-title">${e.year} Honorees</div>
+        <div class="honoree-pair">${honoreeCards}${fallbackCards}</div>
+        <div class="eyebrow">Schedule</div>
+        <div class="sec-title">Evening Program</div>
+        <div class="program-timeline">
+          <div class="prog-item"><div class="prog-time">5:30 PM</div><div class="prog-desc">Fellowship — cocktail hour and informal gathering of Vigil alumni</div></div>
+          <div class="prog-item"><div class="prog-time">7:00 PM</div><div class="prog-desc">Dinner — seated dinner service for all guests</div></div>
+          <div class="prog-item"><div class="prog-time">8:00 PM</div><div class="prog-desc">Program — formal recognition ceremony honoring the ${e.year} Vigil inductees</div></div>
+          <div class="prog-item"><div class="prog-time">9:15 PM</div><div class="prog-desc">Conclusion</div></div>
+        </div>
+      </div>
+      <div class="sidebar">
+        <div class="event-sidebar-inner" style="padding:0">
+          <div class="sidebar-label">Event details</div>
+          <div class="esd-item"><div class="esd-key">Full date</div><div class="esd-val">${e.date}</div></div>
+          <div class="esd-item"><div class="esd-key">Venue</div><div class="esd-val">${e.venue}</div></div>
+          <div class="esd-item"><div class="esd-key">Address</div><div class="esd-val">5445 S. Harlem Ave<br>Chicago, IL</div></div>
+          <div class="esd-item"><div class="esd-key">Admission</div><div class="esd-val">$40 per person</div></div>
+          <div class="view-photos-btn">View photo gallery →</div>
+          <div class="yr-nav">
+            <span class="yr-nav-btn" onclick="openEvent(${(i+1)%events.length})">← ${events[(i+1)%events.length].year}</span>
+            <span class="yr-nav-btn" onclick="openEvent(${(i-1+events.length)%events.length})">${events[(i-1+events.length)%events.length].year} →</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// ---- INIT ----
+renderBioGrid();
+renderEventsTimeline();
+renderEventDetail(0);
+</script>
+</body>
+</html>
