@@ -202,7 +202,9 @@ def build_centurion_pages():
         prev_c = cents[(idx - 1) % len(cents)]
         next_c = cents[(idx + 1) % len(cents)]
 
-        img   = cent.get('img', '')
+        cent_images = cent.get('images', [])
+        img   = cent_images[0]['url'] if cent_images else ''
+        img_cap = cent_images[0].get('caption', cent['name']) if cent_images else cent['name']
         slug  = cent['slug']
         vigil_name = cent.get('vigil_name', '')
         vigil_trans = cent.get('vigil_translation', '')
@@ -227,7 +229,7 @@ def build_centurion_pages():
 <div class="profile-hero">
   <div class="profile-photo-col">
     {img_block}
-    <div class="profile-photo-caption">{esc(cent['name'])}</div>
+    <div class="profile-photo-caption">{esc(img_cap)}</div>
   </div>
   <div class="profile-info-col">
     <div class="profile-bc">
