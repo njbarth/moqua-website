@@ -148,6 +148,7 @@ button, input, select, textarea { font-family: inherit; }
   transition: background .15s;
 }
 .nav-register-btn:hover { background: var(--red-dk); color: var(--white); }
+.nav-register-btn.active { background: var(--blue-dk); color: var(--white); }
 .nav-links .nav-register-btn,
 .nav-links .nav-register-btn:hover { color: var(--white); }
 .nav-links {
@@ -2466,6 +2467,7 @@ button, input, select, textarea { font-family: inherit; }
 }
 .reg-submit-btn:hover { background: var(--red-dk); }
 .reg-form-note { font-size: 12px; font-weight: 300; color: var(--gray-lt); margin-top: 12px; font-style: italic; }
+.reg-form-hint { font-size: 12px; font-weight: 400; color: var(--gray-lt); margin-top: 5px; font-style: italic; }
 .reg-sidebar {
   padding: 36px 28px;
   border-left: 1px solid var(--border);
