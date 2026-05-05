@@ -148,6 +148,8 @@ button, input, select, textarea { font-family: inherit; }
   transition: background .15s;
 }
 .nav-register-btn:hover { background: var(--red-dk); color: var(--white); }
+.nav-links .nav-register-btn,
+.nav-links .nav-register-btn:hover { color: var(--white); }
 .nav-links {
   display: flex;
   gap: 2px;
