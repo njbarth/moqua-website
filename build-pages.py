@@ -407,16 +407,18 @@ def build_event_pages():
           </div>
         </a>"""
             else:
+                # Build initials from first + last word of name
+                parts = name.strip().split()
+                initials = (parts[0][0] + parts[-1][0]).upper() if len(parts) >= 2 else parts[0][0].upper()
                 honoree_cards_html += f"""
         <div class="hf-card">
-          <div class="hf-img" style="background:var(--blue-lt);display:flex;align-items:center;justify-content:center;width:110px;height:140px;">
-            <span style="font-family:'Roboto Condensed',sans-serif;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gray-lt)">Photo TBD</span>
+          <div class="hf-img" style="background:var(--blue);display:flex;align-items:center;justify-content:center;width:110px;height:140px;flex-shrink:0;">
+            <span style="font-family:'Roboto Slab',serif;font-size:28px;font-weight:700;color:rgba(255,255,255,.4)">{esc(initials)}</span>
           </div>
           <div class="hf-body">
             <div class="hf-yr">{esc(year)} Honoree</div>
             <div class="hf-name">{esc(name)}</div>
             <div class="hf-vigil">Vigil Honor</div>
-            <!-- TODO: No bio page for {esc(name)} — add when available -->
           </div>
         </div>"""
 
@@ -426,9 +428,17 @@ def build_event_pages():
             schedule = raw_sched
         else:
             schedule = {'fellowship': '5:30 PM', 'dinner': '7:00 PM', 'program': '8:00 PM', 'conclusion': '9:15 PM'}
-        photo_ext = ev.get('photos_external','')
-        photos_link = f'<a class="view-photos-btn" href="{esc(photo_ext)}" target="_blank" rel="noopener">View photo gallery →</a>' if photo_ext else f'<a class="view-photos-btn" href="gallery/index.html">View photo gallery →</a>'
-        photo_credit = '<div class="esd-item"><div class="esd-key">Photography</div><div class="esd-val">Nick Barth Photography</div></div>' if photo_ext else '<!-- TODO: Add photo credit -->'
+        photo_ext = ev.get('photos_url', '')
+        no_photos = ev.get('photos_hosted') == 'on-site' and not photo_ext
+        if no_photos:
+            photos_link = '<div class="view-photos-btn" style="background:var(--blue-lt);color:var(--gray-lt);cursor:default">Photos not available for this year</div>'
+            photo_credit = '<!-- No photos for this year -->'
+        elif photo_ext:
+            photos_link = f'<a class="view-photos-btn" href="{esc(photo_ext)}" target="_blank" rel="noopener">View photo gallery →</a><div style="font-size:11px;font-weight:300;color:var(--gray-lt);margin-top:4px">Opens nickbarthphotography.com in a new tab.</div>'
+            photo_credit = '<div class="esd-item"><div class="esd-key">Photography</div><div class="esd-val">Nick Barth Photography</div></div>'
+        else:
+            photos_link = f'<a class="view-photos-btn" href="gallery/index.html">View photo gallery →</a>'
+            photo_credit = '<!-- TODO: Add photo credit -->'
         last_names = ' · '.join(n.split(' ')[-1] for n in ev['honorees'])
 
         page = f"""{head_html(f"{year} Vigil Alumni Annual Dinner", f"The {year} Vigil Alumni Annual Dinner — Owasippe Lodge #7, honoring {' and '.join(ev['honorees'])}.", 2)}
@@ -532,7 +542,12 @@ def build_event_pages():
         gallery_dir = os.path.join(out_dir, 'gallery')
         os.makedirs(gallery_dir, exist_ok=True)
         ext_block = ''
-        if photo_ext:
+        if no_photos:
+            ext_block = f"""<div style="background:var(--tan-lt);border:1px solid var(--border);border-radius:4px;padding:40px;text-align:center;color:var(--gray-lt)">
+    <div style="font-family:'Roboto Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px">Photos not available</div>
+    <div style="font-size:13px">No photos were recorded for the {esc(year)} dinner.</div>
+  </div>"""
+        elif photo_ext:
             ext_block = f"""<div style="background:var(--blue-lt);border:1px solid var(--blue-pale);border-radius:4px;padding:24px 28px;margin-bottom:32px;display:flex;align-items:center;justify-content:space-between;gap:20px">
     <div>
       <div class="eyebrow">External gallery</div>

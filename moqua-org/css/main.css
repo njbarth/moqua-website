@@ -1217,6 +1217,114 @@ button, input, select, textarea { font-family: inherit; }
 }
 
 /* ============================================================
+   COMPONENT: SECTION-INTRO (2-col: text left, blue panel right)
+   Used on Centurions and Committee pages
+   ============================================================ */
+.section-intro {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  border-bottom: 1px solid var(--border);
+}
+.si-text {
+  padding: 44px 48px;
+}
+.si-text .content-body { max-width: none; margin-bottom: 0; }
+.si-panel {
+  background: var(--blue);
+  padding: 44px 36px;
+  position: relative;
+}
+.si-panel::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0;
+  width: 6px; height: 100%;
+  background: var(--red);
+}
+.si-quote {
+  font-family: 'Roboto Slab', serif;
+  font-size: 18px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--white);
+  line-height: 1.65;
+  margin-bottom: 14px;
+}
+.si-attr {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.45);
+}
+
+/* ============================================================
+   COMPONENT: ABOUT EDITORIAL (2-col within about-content)
+   ============================================================ */
+.about-editorial {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 40px;
+  margin-bottom: 36px;
+}
+.about-editorial .content-body { max-width: none; margin-bottom: 0; }
+.about-support-panel {
+  background: var(--blue);
+  border-radius: 4px;
+  padding: 28px 26px;
+  position: relative;
+  align-self: start;
+}
+.about-support-panel::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0;
+  width: 6px; height: 100%;
+  background: var(--red);
+  border-radius: 4px 0 0 4px;
+}
+.asp-quote {
+  font-family: 'Roboto Slab', serif;
+  font-size: 15px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--white);
+  line-height: 1.65;
+  margin-bottom: 10px;
+}
+.asp-attr {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.4);
+  margin-bottom: 20px;
+}
+.about-stat {
+  border-top: 1px solid rgba(255,255,255,.12);
+  padding: 14px 0;
+}
+.about-stat:last-child { padding-bottom: 0; }
+.about-stat-num {
+  font-family: 'Roboto Slab', serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.about-stat-label {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.45);
+}
+
+/* ============================================================
    PAGE: EVENTS ARCHIVE
    ============================================================ */
 .timeline-section { padding: 44px 36px; }
@@ -2315,6 +2423,9 @@ button, input, select, textarea { font-family: inherit; }
   .committee-member.flip .cm-photo-col, .committee-member.flip .cm-bio-col { order: unset; }
   .committee-members { padding: 0 28px 40px; }
   .committee-intro { padding: 32px 28px 16px; }
+  .section-intro { grid-template-columns: 1fr; }
+  .si-panel { padding: 32px 28px; }
+  .about-editorial { grid-template-columns: 1fr; gap: 24px; }
   .reg-hero-inner { grid-template-columns: 1fr; gap: 28px; }
   .reg-event-card { display: none; }
   .reg-body { grid-template-columns: 1fr; }
@@ -2366,6 +2477,10 @@ button, input, select, textarea { font-family: inherit; }
   .da-left { flex-direction: column; align-items: flex-start; gap: 8px; }
   .committee-members { padding: 0 16px 32px; }
   .committee-intro { padding: 24px 16px 12px; }
+  .si-text { padding: 28px 16px; }
+  .si-panel { padding: 24px 16px; }
+  .about-editorial { gap: 0; }
+  .about-support-panel { margin-top: 24px; border-radius: 0; }
   .reg-hero { padding: 32px 16px; }
   .reg-form-col { padding: 28px 16px; }
   .reg-form-grid { grid-template-columns: 1fr; }

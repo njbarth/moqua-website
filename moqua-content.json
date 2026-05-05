@@ -7,7 +7,6 @@
     "wpUploads": "http://www.moqua.org/wp-content/uploads/",
     "bannerImage": "http://www.moqua.org/wp-content/uploads/2015/03/New-Banner.jpg"
   },
-
   "homepage": {
     "slug": "/",
     "carouselSlides": [
@@ -42,7 +41,6 @@
     "ctaSecondaryBody": "Join your fellow Vigil Brothers in making a difference in world today. Scouting has been training the leaders of tomorrow for over a century.",
     "footerTagline": "Giving Back — The creators of this site hope it will serve as a rallying point for Vigil Honor members past and present to use their collective talents to promote a love of the outdoors and a sense of obligation to serve society as a whole."
   },
-
   "biographies": [
     {
       "name": "Frank S. Accardi",
@@ -417,7 +415,6 @@
       "bio": "Ronald Jacob Temple was born on September 10, 1940 to Jacob and Maggie Temple (nee Jones). The family initially lived at 2849 W. Warren Blvd., Chicago and later moved to Maywood. Ron attended Beidler and Marshall Elementary schools and Marshall High School in Chicago.\n\nWhile in elementary school, Ron initially joined a small troop in his neighborhood, but due to their lack of activity, was recruited by Bob Sublette, and later, Norville Carter to join Troop 534 sponsored by St. Mark's United Methodist Church under the sage leadership of Scoutmaster, Leonard O. Lee. Never one to idle his time away, Ron earned Exploring's highest recognition, the Silver Award through Post #2534.\n\nTaking an active interest in the Arrow, Ron became an Ordeal Member on 08/06/1956, and sealed his membership with the Brotherhood Honor on 05/03/1957. He immediately took a role in local O/A activities and became the Chief of Mon-da-min Chapter in 1958. Ron was selected by his peers to serve as the Owasippe Lodge #7 Chief in 1959 and 1960. For his unselfish service and leadership, he received the Vigil Honor on 07/14/1960, bestowed with the name \"Elachtoniket\" – The Seeker.\n\nRon's youth leadership extended far beyond the Lodge level and was evident to his Brothers in the Arrow who then selected him to serve as their Section Chief in 1960. At the meeting, he was elected by his peers to serve as National Conference Chief for the 1961 National Order of the Arrow Conference (NOAC) at Indiana University. It is the first and only time an African American has been chosen to lead our honored Order as its Chief.\n\nAfter graduation from Marshall High School in 1958, Ron devoted himself to his education. Ron attended the University of Illinois, Chicago (Navy Pier). He went on to earn a bachelor's degree in American History and Government from Eureka College in Illinois. This was followed by a Master's degree in Modern European History and a Doctorate in the interdisciplinary study in Social Science with a specialization in American Urban History, both advanced degrees from the University of Cincinnati."
     }
   ],
-
   "centurions": {
     "landing": {
       "slug": "centurions",
@@ -531,7 +528,6 @@
       }
     ]
   },
-
   "events": [
     {
       "year": 2020,
@@ -542,7 +538,10 @@
       "address": "5445 S. Harlem Avenue, Chicago, Illinois",
       "cost": "$40.00 per person",
       "schedule": "Fellowship 5:30–7:00 PM | Dinner 7:00–8:00 PM | Program 8:00–9:15 PM",
-      "honorees": ["John P. Dozier", "Robert M. Ward"],
+      "honorees": [
+        "John P. Dozier",
+        "Robert M. Ward"
+      ],
       "photos_slug": "2020-vigil-dinner-pictures",
       "photos_hosted": "on-site",
       "photos_note": "No images found on page — may not have been uploaded"
@@ -556,7 +555,10 @@
       "address": "5445 S. Harlem Avenue, Chicago, Illinois",
       "cost": "$40.00 per person",
       "schedule": "Fellowship 5:30–7:00 PM | Dinner 7:00–8:00 PM | Program 8:00–9:15 PM",
-      "honorees": ["Rev. F. Gerald Scanlan", "Ronald J. Temple, Ph.D."],
+      "honorees": [
+        "Rev. F. Gerald Scanlan",
+        "Ronald J. Temple, Ph.D."
+      ],
       "photos_slug": "2019-vigil-dinner-pictures",
       "photos_hosted": "external",
       "photos_url": "https://www.nickbarthphotography.com/Vigil-Dinners/n-JpNDmS/2019-11-23-Vigil-Dinner/",
@@ -575,7 +577,10 @@
       "address": "5445 S. Harlem Avenue, Chicago, Illinois",
       "cost": "$40.00 per person",
       "schedule": "Fellowship 5:30–7:00 PM | Dinner 7:00–8:00 PM | Program 8:00–9:15 PM",
-      "honorees": ["Grant F. Muraski", "Robert T. Sublette, Sr."],
+      "honorees": [
+        "Grant F. Muraski",
+        "Robert T. Sublette, Sr."
+      ],
       "photos_slug": "2018-vigil-dinner-pictures",
       "photos_hosted": "external",
       "photos_url": "https://www.nickbarthphotography.com/Vigil-Dinners/n-JpNDmS/2018-11-17-Vigil-Dinner/",
@@ -595,8 +600,13 @@
       "address": "5445 S. Harlem Avenue, Chicago, Illinois",
       "cost": "$40.00 per person",
       "schedule": "Fellowship 5:30–7:00 PM | Dinner 7:00–8:00 PM | Program 8:00–9:15 PM",
-      "honorees": ["Norville R. Carter", "James G. Heinlein"],
-      "photos_slug": "2017-vigil-dinner-pictures"
+      "honorees": [
+        "Norville R. Carter",
+        "James G. Heinlein"
+      ],
+      "photos_slug": "2017-vigil-dinner-pictures",
+      "photos_url": "https://www.nickbarthphotography.com/Vigil-Dinners/n-JpNDmS/2017-11-18-Vigil-Dinner",
+      "photos_hosted": "external"
     },
     {
       "year": 2016,
@@ -607,8 +617,13 @@
       "address": "5445 S. Harlem Avenue, Chicago, Illinois",
       "cost": "$40.00 per person",
       "schedule": "Fellowship 5:30–7:00 PM | Dinner 7:00–8:00 PM | Program 8:00–9:15 PM",
-      "honorees": ["Frank S. Accardi", "John N. Brown"],
-      "photos_slug": "2016-vigil-dinner-pictures"
+      "honorees": [
+        "Frank S. Accardi",
+        "John N. Brown"
+      ],
+      "photos_slug": "2016-vigil-dinner-pictures",
+      "photos_url": "https://www.nickbarthphotography.com/Vigil-Dinners/n-JpNDmS/2016-11-19-Vigil-Dinner",
+      "photos_hosted": "external"
     },
     {
       "year": 2015,
@@ -619,11 +634,15 @@
       "address": "5445 S. Harlem Avenue, Chicago, Illinois",
       "cost": "$40.00 per person",
       "schedule": "Fellowship 5:30–7:00 PM | Dinner 7:00–8:00 PM | Program 8:00–9:15 PM",
-      "honorees": ["Frank G. Collins", "Rev. John M. Kaserow"],
-      "photos_slug": "2015-vigil-dinner-pictures"
+      "honorees": [
+        "Frank G. Collins",
+        "Rev. John M. Kaserow"
+      ],
+      "photos_slug": "2015-vigil-dinner-pictures",
+      "photos_url": "https://www.nickbarthphotography.com/Vigil-Dinners/n-JpNDmS/2015-11-21-Vigil-Dinner",
+      "photos_hosted": "external"
     }
   ],
-
   "guestLodge": {
     "slug": "guest-lodge",
     "images": [
@@ -653,7 +672,6 @@
     "dedicationDate": "Saturday May 24, 2014 at 5:15 PM at LC 2 (the Guest Lodge)",
     "content": "Yes, I want to help Chicago Area Council fulfill its mission to the youth of Chicago and get them to Owasippe. Click on Friends of Scouting and become a supporter!\n\nOwasippe is my home. In addition to my volunteer time, I can help financially. Click on the Guest Lodge Donation form and help us complete this project and move on to the next one!\n\nThe Owasippe Staff Association and the Chicago Area Council Board of Directors are pleased to announce a Dedication of the Guest Lodge and Celebration of Capital Improvements at Owasippe. A dedication ceremony was held on Saturday May 24, 2014 at 5:15 PM at LC 2 (the Guest Lodge) followed by a brief open house. Everyone is welcome to attend!"
   },
-
   "scrapeNotes": {
     "completedBios": 24,
     "completedCenturions": 7,
@@ -661,8 +679,14 @@
     "galleryPages": {
       "note": "2018 and 2019 galleries link externally to nickbarthphotography.com. 2015-2017 and 2020 galleries were rate-limited during scrape. Inline carousel images from those years are captured above.",
       "externalGalleries": [
-        { "year": 2019, "url": "https://www.nickbarthphotography.com/Vigil-Dinners/n-JpNDmS/2019-11-23-Vigil-Dinner/" },
-        { "year": 2018, "url": "https://www.nickbarthphotography.com/Vigil-Dinners/n-JpNDmS/2018-11-17-Vigil-Dinner/" }
+        {
+          "year": 2019,
+          "url": "https://www.nickbarthphotography.com/Vigil-Dinners/n-JpNDmS/2019-11-23-Vigil-Dinner/"
+        },
+        {
+          "year": 2018,
+          "url": "https://www.nickbarthphotography.com/Vigil-Dinners/n-JpNDmS/2018-11-17-Vigil-Dinner/"
+        }
       ]
     },
     "imageBaseUrl": "http://www.moqua.org/wp-content/uploads/",
