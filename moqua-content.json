@@ -3,35 +3,33 @@
     "name": "Moqua Foundation",
     "tagline": "Preserving the traditions.",
     "mission": "The creators of this site hope it will serve as a rallying point for Vigil Honor members past and present to use their collective talents to promote a love of the outdoors and a sense of obligation to serve society as a whole.",
-    "baseUrl": "http://www.moqua.org",
-    "wpUploads": "http://www.moqua.org/wp-content/uploads/",
-    "bannerImage": "http://www.moqua.org/wp-content/uploads/2015/03/New-Banner.jpg"
+    "baseUrl": "http://www.moqua.org"
   },
   "homepage": {
     "slug": "/",
     "carouselSlides": [
       {
-        "image": "http://www.moqua.org/wp-content/uploads/2019/11/Vigil-Dinner-Group-11-23-2019-carousel-1480x604.jpg",
+        "image": "images/events/Vigil-Dinner-Group-11-23-2019-carousel-1480x604.jpg",
         "caption": "Vigil Brothers attending the 2019 Dinner – November 23, 2019"
       },
       {
-        "image": "http://www.moqua.org/wp-content/uploads/2019/11/Temple-Carousel-Photo-1480x604.jpg",
+        "image": "images/events/Temple-Carousel-Photo-1480x604.jpg",
         "caption": "Ronald J. Temple, Ph.D. is recognized as an Owasippe #7 Vigil Dinner Honoree on November 23, 2019"
       },
       {
-        "image": "http://www.moqua.org/wp-content/uploads/2019/11/Scanlan-Carousel-Picture-1480x604.jpg",
+        "image": "images/events/Scanlan-Carousel-Picture-1480x604.jpg",
         "caption": "Rev. F. Gerald Scanlan is recognized as an Owasippe #7 Vigil Dinner honoree on November 23, 2019"
       },
       {
-        "image": "http://www.moqua.org/wp-content/uploads/2018/11/Muraski-carousel-picture-1480x604.jpg",
+        "image": "images/events/Muraski-carousel-picture-1480x604.jpg",
         "caption": "Grant F. Muraski is recognized as an Owasippe Lodge #7 Vigil Dinner Honoree on November 17, 2018"
       },
       {
-        "image": "http://www.moqua.org/wp-content/uploads/2018/11/Sublette-carousel-picture-1480x604.jpg",
+        "image": "images/events/Sublette-carousel-picture-1480x604.jpg",
         "caption": "Robert T. Sublette, Sr. is recognized as an Owasippe Lodge #7 Vigil Dinner honoree on November 17, 2018"
       },
       {
-        "image": "http://www.moqua.org/wp-content/uploads/2018/11/Owasippe-Lodge-7-Chiefs-11-17-2018-carousel-1480x604.jpg",
+        "image": "images/events/Owasippe-Lodge-7-Chiefs-11-17-2018-carousel-1480x604.jpg",
         "caption": "Past Chiefs of Owasippe Lodge #7 – November 17, 2018"
       }
     ],
@@ -50,12 +48,12 @@
       "vigil_date": "August 10, 1968",
       "images": [
         {
-          "url": "http://www.moqua.org/wp-content/uploads/2016/09/Frank-Accardi-1965-202x300.jpg",
-          "full": "http://www.moqua.org/wp-content/uploads/2016/09/Frank-Accardi-1965.jpg",
+          "url": "images/portraits/Frank-Accardi-1965-202x300.jpg",
+          "full": "images/portraits/Frank-Accardi-1965.jpg",
           "caption": "Frank S. Accardi – Woodbadge 1965"
         },
         {
-          "url": "http://www.moqua.org/wp-content/uploads/2016/09/Frank-Accardi-2010-216x300.jpg",
+          "url": "images/portraits/Frank-Accardi-2010-216x300.jpg",
           "caption": "Frank S. Accardi – 2010"
         }
       ],
@@ -71,17 +69,17 @@
       "age_at_death": 94,
       "images": [
         {
-          "url": "http://www.moqua.org/wp-content/uploads/2012/03/Jack-B.-Blane-circa-1938-revised-257x300.jpg",
-          "full": "http://www.moqua.org/wp-content/uploads/2012/03/Jack-B.-Blane-circa-1938-revised.jpg",
+          "url": "images/portraits/Jack-B.-Blane-circa-1938-revised-257x300.jpg",
+          "full": "images/portraits/Jack-B.-Blane-circa-1938-revised.jpg",
           "caption": "Jack B. Blane – GHQ Staff – Owasippe Scout Camp – Summer 1938"
         },
         {
-          "url": "http://www.moqua.org/wp-content/uploads/2012/03/Jack-Blane-2010-787x1024.jpg",
-          "full": "http://www.moqua.org/wp-content/uploads/2012/03/Jack-Blane-2010.jpg",
+          "url": "images/portraits/Jack-Blane-2010-787x1024.jpg",
+          "full": "images/portraits/Jack-Blane-2010.jpg",
           "caption": "Jack B. Blane – 2010 Owasippe Lodge Vigil Dinner"
         },
         {
-          "url": "http://www.moqua.org/wp-content/uploads/2012/11/Blane-award-11-17-2012.jpg",
+          "url": "images/events/Blane-award-11-17-2012.jpg",
           "caption": "Jack B. Blane (center) is recognized as an Owasippe Lodge #7 Vigil Honoree on November 17, 2012"
         }
       ],
@@ -94,16 +92,16 @@
       "died": "December 24, 2011",
       "images": [
         {
-          "url": "http://www.moqua.org/wp-content/uploads/2011/10/Lawrence-S.-Branch-11-20-20101.jpg",
+          "url": "images/portraits/Lawrence-S.-Branch-11-20-20101.jpg",
           "caption": "Larry Branch as the honoree at the 2010 Owasippe Lodge Vigil Dinner"
         },
         {
-          "url": "http://www.moqua.org/wp-content/uploads/2011/10/Camp-Belnap-1934-revised-1024x816.jpg",
-          "full": "http://www.moqua.org/wp-content/uploads/2011/10/Camp-Belnap-1934-revised.jpg",
+          "url": "images/lodge/Camp-Belnap-1934-revised-1024x816.jpg",
+          "full": "images/lodge/Camp-Belnap-1934-revised.jpg",
           "caption": "Camp Belnap Staff – 1934 – Owasippe Scout Camp. Larry Branch is in the back row, second from the right."
         },
         {
-          "url": "http://www.moqua.org/wp-content/uploads/2011/11/Lawrence-S.-Branch-1936.jpg",
+          "url": "images/portraits/Lawrence-S.-Branch-1936.jpg",
           "caption": "Eagle Scout Lawrence S. Branch – circa 1935"
         }
       ],
@@ -118,13 +116,13 @@
       "died": "August 17, 2014",
       "images": [
         {
-          "url": "http://www.moqua.org/wp-content/uploads/2011/10/Frederick-C.-Brems-1940-Camp-Twin-Echos-Ligonier-PA-09-01-1940-profile-revised-137x300.jpg",
-          "full": "http://www.moqua.org/wp-content/uploads/2011/10/Frederick-C.-Brems-1940-Camp-Twin-Echos-Ligonier-PA-09-01-1940-profile-revised.jpg",
+          "url": "images/portraits/Frederick-C.-Brems-1940-Camp-Twin-Echos-Ligonier-PA-09-01-1940-profile-revised-137x300.jpg",
+          "full": "images/portraits/Frederick-C.-Brems-1940-Camp-Twin-Echos-Ligonier-PA-09-01-1940-profile-revised.jpg",
           "caption": "Owasippe Lodge Chief 1941 – Frederick C. Brems (Photo taken at National O/A Meeting – 09/1940 – Camp Twin Echo – Ligonier, PA)"
         },
         {
-          "url": "http://www.moqua.org/wp-content/uploads/2011/10/20101120VigilDinner181-Brems1-1024x768.jpg",
-          "full": "http://www.moqua.org/wp-content/uploads/2011/10/20101120VigilDinner181-Brems1.jpg",
+          "url": "images/portraits/20101120VigilDinner181-Brems1-1024x768.jpg",
+          "full": "images/portraits/20101120VigilDinner181-Brems1.jpg",
           "caption": "Frederick C. Brems recognized as a Distinguished Vigil Member of Owasippe Lodge #7 – November 20, 2011"
         }
       ],
@@ -138,15 +136,15 @@
       "vigil_date": "August 11, 1972",
       "images": [
         {
-          "url": "http://www.moqua.org/wp-content/uploads/2016/10/John-Brown-High-School-1952-262x300.jpg",
+          "url": "images/portraits/John-Brown-High-School-1952-262x300.jpg",
           "caption": "John N. Brown – High School Graduation – 1952"
         },
         {
-          "url": "http://www.moqua.org/wp-content/uploads/2016/10/John-Brown-circa-1971-227x300.jpg",
+          "url": "images/portraits/John-Brown-circa-1971-227x300.jpg",
           "caption": "John N. Brown – circa 1971"
         },
         {
-          "url": "http://www.moqua.org/wp-content/uploads/2016/10/NOAC-Contingent-09-1969-edited-300x192.jpg",
+          "url": "images/lodge/NOAC-Contingent-09-1969-edited-300x192.jpg",
           "caption": "Owasippe Lodge #7 NOAC Contingent – September 1969"
         }
       ],
@@ -161,11 +159,11 @@
       "died": "October 25, 2003",
       "images": [
         {
-          "url": "http://www.moqua.org/wp-content/uploads/2011/10/Norman-C.-Buettner-1965-300x200.jpg",
+          "url": "images/portraits/Norman-C.-Buettner-1965-300x200.jpg",
           "caption": "Norman C. Buettner – 1965"
         },
         {
-          "url": "http://www.moqua.org/wp-content/uploads/2011/10/Norman-C.-Buettner-2001-250x300.jpg",
+          "url": "images/portraits/Norman-C.-Buettner-2001-250x300.jpg",
           "caption": "Norman C. Buettner – 2001"
         }
       ],
@@ -179,7 +177,7 @@
       "vigil_date": "May 28, 2000",
       "images": [
         {
-          "url": "http://www.moqua.org/wp-content/uploads/2013/09/Bob-Burns-portrait-circa-1940.jpg",
+          "url": "images/portraits/Bob-Burns-portrait-circa-1940.jpg",
           "caption": "Robert J. Burns – circa 1940"
         }
       ],
@@ -193,7 +191,7 @@
       "vigil_date": "August 13, 1961",
       "images": [
         {
-          "url": "http://www.moqua.org/wp-content/uploads/2017/10/Norville-Carter-circa-1954-247x300.jpg",
+          "url": "images/portraits/Norville-Carter-circa-1954-247x300.jpg",
           "caption": "Norville R. Carter – circa 1954"
         }
       ],
@@ -207,8 +205,8 @@
       "vigil_date": "August 12, 1956",
       "images": [
         {
-          "url": "http://www.moqua.org/wp-content/uploads/2015/09/Frank-Collins-circa-1955-819x1024.jpg",
-          "full": "http://www.moqua.org/wp-content/uploads/2015/09/Frank-Collins-circa-1955.jpg",
+          "url": "images/portraits/Frank-Collins-circa-1955-819x1024.jpg",
+          "full": "images/portraits/Frank-Collins-circa-1955.jpg",
           "caption": "Frank G. Collins – circa 1955"
         }
       ],
@@ -222,8 +220,8 @@
       "vigil_date": "August 1, 1966",
       "images": [
         {
-          "url": "http://www.moqua.org/wp-content/uploads/2011/10/young-mr-cook-modified-230x300.jpg",
-          "full": "http://www.moqua.org/wp-content/uploads/2011/10/young-mr-cook-modified.jpg",
+          "url": "images/portraits/young-mr-cook-modified-230x300.jpg",
+          "full": "images/portraits/young-mr-cook-modified.jpg",
           "caption": "John L. Cook – circa 1955"
         }
       ],
@@ -236,7 +234,7 @@
       "vigil_date": "August 4, 1935",
       "images": [
         {
-          "url": "http://www.moqua.org/wp-content/uploads/2014/08/Dwaine-Filkins-1940-Twin-Echos-cropped-revised.jpg",
+          "url": "images/portraits/Dwaine-Filkins-1940-Twin-Echos-cropped-revised.jpg",
           "caption": "Dwaine E. Filkins (Photo taken at National O/A Meeting – 09/1940 – Camp Twin Echoes – Ligonier, PA)"
         }
       ],
@@ -250,7 +248,7 @@
       "vigil_date": "August 12, 1956",
       "images": [
         {
-          "url": "http://www.moqua.org/wp-content/uploads/2017/10/Jim-Heinlein-youth-270x300.jpg",
+          "url": "images/portraits/Jim-Heinlein-youth-270x300.jpg",
           "caption": "James G. Heinlein – circa 1950"
         }
       ],
@@ -261,8 +259,8 @@
       "slug": "john-m-kaserow",
       "images": [
         {
-          "url": "http://www.moqua.org/wp-content/uploads/2015/09/John-M-Kaserow-1955-819x1024.jpg",
-          "full": "http://www.moqua.org/wp-content/uploads/2015/09/John-M-Kaserow-1955.jpg",
+          "url": "images/portraits/John-M-Kaserow-1955-819x1024.jpg",
+          "full": "images/portraits/John-M-Kaserow-1955.jpg",
           "caption": "John M. Kaserow – High School Graduation 1955"
         }
       ],
@@ -273,8 +271,8 @@
       "slug": "krejci",
       "images": [
         {
-          "url": "http://www.moqua.org/wp-content/uploads/2011/10/Robert-H.-Krejci-FJP-10-08-2011-300x200.jpg",
-          "full": "http://www.moqua.org/wp-content/uploads/2011/10/Robert-H.-Krejci-FJP-10-08-2011.jpg",
+          "url": "images/portraits/Robert-H.-Krejci-FJP-10-08-2011-300x200.jpg",
+          "full": "images/portraits/Robert-H.-Krejci-FJP-10-08-2011.jpg",
           "caption": "Robert H. Krejci (left) being recognized as the Owasippe Lodge #7 – 2011 Vigil Dinner Honoree by Francis J. Podbielski, MD (right) – 10/08/2011"
         }
       ],
@@ -287,11 +285,11 @@
       "slug": "grant-f-muraski",
       "images": [
         {
-          "url": "http://www.moqua.org/wp-content/uploads/2018/10/Grant-Muraski-as-a-youth-240x300.jpg",
+          "url": "images/portraits/Grant-Muraski-as-a-youth-240x300.jpg",
           "caption": "Grant F. Muraski as a Cub Scout – Circa 1942"
         },
         {
-          "url": "http://www.moqua.org/wp-content/uploads/2018/11/Muraski-carousel-picture-1480x604.jpg",
+          "url": "images/events/Muraski-carousel-picture-1480x604.jpg",
           "caption": "Grant F. Muraski – 2018 Vigil Dinner Honoree carousel"
         }
       ],
@@ -302,7 +300,7 @@
       "slug": "phillips",
       "images": [
         {
-          "url": "http://www.moqua.org/wp-content/uploads/2013/09/Phillips-circa-1940.jpg",
+          "url": "images/portraits/Phillips-circa-1940.jpg",
           "caption": "Arties R. Phillips, Jr. – circa 1940"
         }
       ],
@@ -313,7 +311,7 @@
       "slug": "reilly",
       "images": [
         {
-          "url": "http://www.moqua.org/wp-content/uploads/2012/03/Daniel-J.-Reilly-1938-revised.jpg",
+          "url": "images/portraits/Daniel-J.-Reilly-1938-revised.jpg",
           "caption": "Daniel J. Reilly III – July 1938"
         }
       ],
@@ -324,7 +322,7 @@
       "slug": "sanchez",
       "images": [
         {
-          "url": "http://www.moqua.org/wp-content/uploads/2014/11/John-Sanchez-circa-2003a.jpg",
+          "url": "images/portraits/John-Sanchez-circa-2003a.jpg",
           "caption": "John Sanchez, Sr. – circa 2003"
         }
       ],
@@ -335,11 +333,11 @@
       "slug": "rev-f-gerald-scanlan",
       "images": [
         {
-          "url": "http://www.moqua.org/wp-content/uploads/2019/11/Fr-Jerry-Scanlan-HS-Graduation-Photo-1954.jpg",
+          "url": "images/portraits/Fr-Jerry-Scanlan-HS-Graduation-Photo-1954.jpg",
           "caption": "Jerry Scanlan in 1954 on his graduation from Quigley Preparatory Seminary in Chicago"
         },
         {
-          "url": "http://www.moqua.org/wp-content/uploads/2019/11/Scanlan-Carousel-Picture-1480x604.jpg",
+          "url": "images/events/Scanlan-Carousel-Picture-1480x604.jpg",
           "caption": "Rev. F. Gerald Scanlan recognized as 2019 Vigil Dinner honoree"
         }
       ],
@@ -353,7 +351,7 @@
       "vigil_date": "August 1, 1938",
       "images": [
         {
-          "url": "http://www.moqua.org/wp-content/uploads/2011/10/Arn-Schenk-circa-1936.jpg",
+          "url": "images/portraits/Arn-Schenk-circa-1936.jpg",
           "caption": "Arnold R. Schenk – July 1936"
         }
       ],
@@ -364,7 +362,7 @@
       "slug": "stanton",
       "images": [
         {
-          "url": "http://www.moqua.org/wp-content/uploads/2011/11/Stanton-Miller-1939.jpg",
+          "url": "images/portraits/Stanton-Miller-1939.jpg",
           "caption": "Dr. Stanton, MD named Meteu of Owasippe Lodge #7 by Stanley R. Miller – December 1939"
         }
       ],
@@ -375,7 +373,7 @@
       "slug": "studaven",
       "images": [
         {
-          "url": "http://www.moqua.org/wp-content/uploads/2014/08/Donald-Studaven-05-1982.jpg",
+          "url": "images/portraits/Donald-Studaven-05-1982.jpg",
           "caption": "Donald Studaven – May 1982"
         }
       ],
@@ -386,11 +384,11 @@
       "slug": "robert-t-sublette-sr",
       "images": [
         {
-          "url": "http://www.moqua.org/wp-content/uploads/2018/10/Bob-Sublette-as-a-youth-240x300.jpg",
+          "url": "images/portraits/Bob-Sublette-as-a-youth-240x300.jpg",
           "caption": "Robert T. Sublette, Sr. – circa 1951"
         },
         {
-          "url": "http://www.moqua.org/wp-content/uploads/2018/11/Sublette-carousel-picture-1480x604.jpg",
+          "url": "images/events/Sublette-carousel-picture-1480x604.jpg",
           "caption": "Robert T. Sublette, Sr. – 2018 Vigil Dinner Honoree carousel"
         }
       ],
@@ -404,11 +402,11 @@
       "vigil_date": "July 14, 1960",
       "images": [
         {
-          "url": "http://www.moqua.org/wp-content/uploads/2019/11/Ron-Temple-with-Edson-and-Goodman-1960-816x1024.jpg",
+          "url": "images/portraits/Ron-Temple-with-Edson-and-Goodman-1960-816x1024.jpg",
           "caption": "Ron Temple as the 1961 O/A National Chief with founders Carroll A. Edson and E. Urner Goodman"
         },
         {
-          "url": "http://www.moqua.org/wp-content/uploads/2019/11/Temple-Carousel-Photo-1480x604.jpg",
+          "url": "images/events/Temple-Carousel-Photo-1480x604.jpg",
           "caption": "Ronald J. Temple, Ph.D. recognized as 2019 Vigil Dinner Honoree"
         }
       ],
@@ -419,7 +417,7 @@
     "landing": {
       "slug": "centurions",
       "intro": "For nearly 100 years, the Order of the Arrow has purposefully recognized Scouts and Scouters who best exemplify the Scout Oath and Law in their daily lives. Therefore, our organization's centennial provides a unique opportunity to commemorate those among us who are exemplars of the \"high ideals and purpose of the Order of the Arrow.\" The Centurion Award aims to highlight \"Hometown Heroes,\" or Arrowmen who have meaningfully contributed to the forming, maturing and ongoing operational excellence of their local council's lodge, and who, in doing so, inspired others to follow in their footsteps.",
-      "medalImage": "http://www.moqua.org/wp-content/uploads/2015/11/C-100919-BSA-OA-Centurion-Medal-v2-Texas-MC-FRONT-754x1024.jpg"
+      "medalImage": "images/awards/C-100919-BSA-OA-Centurion-Medal-v2-Texas-MC-FRONT-754x1024.jpg"
     },
     "profiles": [
       {
@@ -431,7 +429,7 @@
         "lodge_chief_year": "1932",
         "images": [
           {
-            "url": "http://www.moqua.org/wp-content/uploads/2015/11/Gerry-Blake-3-x-5-revised.jpg",
+            "url": "images/portraits/Gerry-Blake-3-x-5-revised.jpg",
             "caption": "Gerald H. Blake"
           }
         ],
@@ -445,8 +443,8 @@
         "vigil_date": "August 15, 1960",
         "images": [
           {
-            "url": "http://www.moqua.org/wp-content/uploads/2011/11/Sheridan-U.-Nunn-August-1972-NOAC-700x1024.jpg",
-            "full": "http://www.moqua.org/wp-content/uploads/2011/11/Sheridan-U.-Nunn-August-1972-NOAC.jpg",
+            "url": "images/portraits/Sheridan-U.-Nunn-August-1972-NOAC-700x1024.jpg",
+            "full": "images/portraits/Sheridan-U.-Nunn-August-1972-NOAC.jpg",
             "caption": "Sheridan U. Nunn"
           }
         ],
@@ -458,8 +456,8 @@
         "note": "Also listed under Biographies — Centurion profile is distinct",
         "images": [
           {
-            "url": "http://www.moqua.org/wp-content/uploads/2015/11/Ron-Temple-3-x-5-615x1024.jpg",
-            "full": "http://www.moqua.org/wp-content/uploads/2015/11/Ron-Temple-3-x-5.jpg",
+            "url": "images/portraits/Ron-Temple-3-x-5-615x1024.jpg",
+            "full": "images/portraits/Ron-Temple-3-x-5.jpg",
             "caption": "Ronald J. Temple, Ph.D."
           }
         ],
@@ -474,8 +472,8 @@
         "lodge_chief_year": "1977",
         "images": [
           {
-            "url": "http://www.moqua.org/wp-content/uploads/2015/11/John-Kosik-3-x-5-615x1024.jpg",
-            "full": "http://www.moqua.org/wp-content/uploads/2015/11/John-Kosik-3-x-5.jpg",
+            "url": "images/portraits/John-Kosik-3-x-5-615x1024.jpg",
+            "full": "images/portraits/John-Kosik-3-x-5.jpg",
             "caption": "John C. Kosik"
           }
         ],
@@ -489,7 +487,7 @@
         "vigil_date": "May 23, 1981",
         "images": [
           {
-            "url": "http://www.moqua.org/wp-content/uploads/2015/11/FJP-3-x-5-1978.jpg",
+            "url": "images/portraits/FJP-3-x-5-1978.jpg",
             "caption": "Francis J. Podbielski – 1978"
           }
         ],
@@ -504,8 +502,8 @@
         "lodge_chief_year": "1981",
         "images": [
           {
-            "url": "http://www.moqua.org/wp-content/uploads/2015/11/Bob-Landmichl-3-x-5-614x1024.jpg",
-            "full": "http://www.moqua.org/wp-content/uploads/2015/11/Bob-Landmichl-3-x-5.jpg",
+            "url": "images/portraits/Bob-Landmichl-3-x-5-614x1024.jpg",
+            "full": "images/portraits/Bob-Landmichl-3-x-5.jpg",
             "caption": "Robert C. Landmichl"
           }
         ],
@@ -519,8 +517,8 @@
         "vigil_date": "May 29, 1983",
         "images": [
           {
-            "url": "http://www.moqua.org/wp-content/uploads/2015/11/Ted-Kumzi-3-x-5-615x1024.jpg",
-            "full": "http://www.moqua.org/wp-content/uploads/2015/11/Ted-Kumzi-3-x-5.jpg",
+            "url": "images/portraits/Ted-Kumzi-3-x-5-615x1024.jpg",
+            "full": "images/portraits/Ted-Kumzi-3-x-5.jpg",
             "caption": "Theodore B. Kumzi"
           }
         ],
@@ -563,9 +561,9 @@
       "photos_hosted": "external",
       "photos_url": "https://www.nickbarthphotography.com/Vigil-Dinners/n-JpNDmS/2019-11-23-Vigil-Dinner/",
       "carousel_images": [
-        "http://www.moqua.org/wp-content/uploads/2019/11/Vigil-Dinner-Group-11-23-2019-carousel-1480x604.jpg",
-        "http://www.moqua.org/wp-content/uploads/2019/11/Temple-Carousel-Photo-1480x604.jpg",
-        "http://www.moqua.org/wp-content/uploads/2019/11/Scanlan-Carousel-Picture-1480x604.jpg"
+        "images/events/Vigil-Dinner-Group-11-23-2019-carousel-1480x604.jpg",
+        "images/events/Temple-Carousel-Photo-1480x604.jpg",
+        "images/events/Scanlan-Carousel-Picture-1480x604.jpg"
       ]
     },
     {
@@ -586,9 +584,9 @@
       "photos_url": "https://www.nickbarthphotography.com/Vigil-Dinners/n-JpNDmS/2018-11-17-Vigil-Dinner/",
       "video_url": "https://youtu.be/Fj53E2ygB9k",
       "carousel_images": [
-        "http://www.moqua.org/wp-content/uploads/2018/11/Muraski-carousel-picture-1480x604.jpg",
-        "http://www.moqua.org/wp-content/uploads/2018/11/Sublette-carousel-picture-1480x604.jpg",
-        "http://www.moqua.org/wp-content/uploads/2018/11/Owasippe-Lodge-7-Chiefs-11-17-2018-carousel-1480x604.jpg"
+        "images/events/Muraski-carousel-picture-1480x604.jpg",
+        "images/events/Sublette-carousel-picture-1480x604.jpg",
+        "images/events/Owasippe-Lodge-7-Chiefs-11-17-2018-carousel-1480x604.jpg"
       ]
     },
     {
@@ -647,61 +645,19 @@
     "slug": "guest-lodge",
     "images": [
       {
-        "url": "http://www.moqua.org/wp-content/uploads/2014/03/Guest-Lodge-Postcard-inverted.jpg",
+        "url": "images/lodge/Guest-Lodge-Postcard-inverted.jpg",
         "caption": "Guest Lodge Plans"
       },
       {
-        "url": "http://www.moqua.org/wp-content/uploads/2014/03/photo-6.jpg",
+        "url": "images/lodge/photo-6.jpg",
         "caption": "Guest Lodge – construction photo"
       },
       {
-        "url": "http://www.moqua.org/wp-content/uploads/2014/03/photo-1.jpg",
+        "url": "images/lodge/photo-1.jpg",
         "caption": "Guest Lodge – construction photo"
-      }
-    ],
-    "pdfs": [
-      {
-        "label": "Friends of Scouting",
-        "url": "http://www.moqua.org/wp-content/uploads/2014/03/Eagle-Patrol-Brochure.pdf"
-      },
-      {
-        "label": "Guest Lodge Donation Form",
-        "url": "http://www.moqua.org/wp-content/uploads/2014/03/GuestLodge_donation_form.pdf"
       }
     ],
     "dedicationDate": "Saturday May 24, 2014 at 5:15 PM at LC 2 (the Guest Lodge)",
     "content": "Yes, I want to help Chicago Area Council fulfill its mission to the youth of Chicago and get them to Owasippe. Click on Friends of Scouting and become a supporter!\n\nOwasippe is my home. In addition to my volunteer time, I can help financially. Click on the Guest Lodge Donation form and help us complete this project and move on to the next one!\n\nThe Owasippe Staff Association and the Chicago Area Council Board of Directors are pleased to announce a Dedication of the Guest Lodge and Celebration of Capital Improvements at Owasippe. A dedication ceremony was held on Saturday May 24, 2014 at 5:15 PM at LC 2 (the Guest Lodge) followed by a brief open house. Everyone is welcome to attend!"
-  },
-  "scrapeNotes": {
-    "completedBios": 24,
-    "completedCenturions": 7,
-    "completedEvents": 6,
-    "galleryPages": {
-      "note": "2018 and 2019 galleries link externally to nickbarthphotography.com. 2015-2017 and 2020 galleries were rate-limited during scrape. Inline carousel images from those years are captured above.",
-      "externalGalleries": [
-        {
-          "year": 2019,
-          "url": "https://www.nickbarthphotography.com/Vigil-Dinners/n-JpNDmS/2019-11-23-Vigil-Dinner/"
-        },
-        {
-          "year": 2018,
-          "url": "https://www.nickbarthphotography.com/Vigil-Dinners/n-JpNDmS/2018-11-17-Vigil-Dinner/"
-        }
-      ]
-    },
-    "imageBaseUrl": "http://www.moqua.org/wp-content/uploads/",
-    "missingData": [
-      "Burns bio tail end truncated (token limit)",
-      "Collins bio tail end truncated",
-      "Carter bio tail end truncated",
-      "Kaserow bio tail end truncated",
-      "Krejci bio tail end truncated",
-      "Studaven bio tail end truncated",
-      "Sublette bio tail end truncated",
-      "Stanton bio tail end truncated",
-      "Gallery photo grids for 2015, 2016, 2017 (rate limited)",
-      "Contact page",
-      "Blog archive posts (2010-2013)"
-    ]
   }
 }

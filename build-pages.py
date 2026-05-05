@@ -57,15 +57,19 @@ _IMG_CATEGORY = {
 _FNAME_TO_CAT = {fname: cat for cat, fnames in _IMG_CATEGORY.items() for fname in fnames}
 
 def local_img(url, depth):
-    """Convert a WordPress upload URL to a local relative path at the given page depth."""
+    """Return a depth-relative path to a local image.
+    Accepts either an already-local path (images/portraits/foo.jpg)
+    or a legacy WordPress URL (http://www.moqua.org/wp-content/uploads/foo.jpg).
+    """
     if not url:
         return ''
-    fname = url.split('/')[-1]
-    if fname.endswith('.pdf'):
-        prefix = '../' * depth
-        return prefix + 'pdfs/' + fname
-    cat = _FNAME_TO_CAT.get(fname, 'portraits')
     prefix = '../' * depth
+    # Already a local path — just prepend the depth prefix
+    if not url.startswith('http'):
+        return prefix + url
+    # Legacy WP URL fallback — extract filename and categorise
+    fname = url.split('/')[-1]
+    cat = _FNAME_TO_CAT.get(fname, 'portraits')
     return prefix + f'images/{cat}/{fname}'
 
 
