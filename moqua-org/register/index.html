@@ -96,10 +96,9 @@
     <div class="reg-form-title">Registration Form</div>
     <div class="reg-form-sub">Complete this form to reserve your seat. Payment instructions are on the right.</div>
 
-    <!-- TODO: Replace YOUR_FORM_ID with your Formspree endpoint after creating the form at formspree.io -->
-    <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+    <form id="reg-form" action="https://formspree.io/f/xnjwvbpb" method="POST">
 
-      <!-- Hidden redirect after submission -->
+      <!-- Redirect after submission — overridden by JS for CC/ACH payers -->
       <input type="hidden" name="_next" value="https://moqua.org/register/thank-you/" />
 
       <div class="reg-form-section">
@@ -263,5 +262,13 @@
 </footer>
 
 <script src="../js/main.js"></script>
+<script>
+  document.getElementById('reg-form').addEventListener('submit', function() {
+    var method = document.getElementById('reg-payment').value;
+    if (method === 'Credit card or ACH (+$3.00 fee)') {
+      this.querySelector('[name="_next"]').value = 'https://buy.stripe.com/28E28r5Zsa8xcmp2Pkbsc00';
+    }
+  });
+</script>
 </body>
 </html>
