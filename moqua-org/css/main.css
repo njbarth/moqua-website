@@ -2524,6 +2524,8 @@ button, input, select, textarea { font-family: inherit; }
   margin-top: 6px;
 }
 .payment-option-tag.recommended { background: rgba(92,184,92,.15); color: #2d7a2d; }
+stripe-buy-button { display: block; width: 100%; max-width: 100%; overflow: hidden; }
+.stripe-btn-wrap { width: 100%; overflow: hidden; box-sizing: border-box; }
 .qr-placeholder {
   width: 100%;
   background: var(--white);
