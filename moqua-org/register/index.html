@@ -215,10 +215,16 @@
       <div class="payment-option">
         <div class="payment-option-header">
           <div class="payment-option-icon" style="background:#635bff;color:#fff;">▶</div>
-          <div class="payment-option-name">Credit Card</div>
+          <div class="payment-option-name">Credit Card via Stripe</div>
         </div>
-        <div class="payment-option-body">Pay securely by credit card via Stripe. A 3% processing fee applies. You'll receive a payment link after submitting your registration.</div>
-        <div class="payment-option-tag">+3% processing fee</div>
+        <div class="payment-option-body">Pay securely by credit card. A $3.00 processing fee is included. Select the number of seats after clicking below.</div>
+        <div style="margin-top:10px;">
+          <stripe-buy-button
+            buy-button-id="buy_btn_1TTtl8KBWtm9r6Ivo4zdjqJY"
+            publishable-key="pk_test_51TTkv8KBWtm9r6IvWMmFP3QxQHrzFgA4N3VKV0a306rXsUfbTIzbOKfhuoX2p4n0qIbjjOhNgHZLEDkL3yTl0WHx00emD2I8D9"
+          ></stripe-buy-button>
+        </div>
+        <div class="payment-option-tag">+$3.00 processing fee · powered by Stripe</div>
       </div>
     </div>
 
@@ -260,5 +266,6 @@
 </footer>
 
 <script src="../js/main.js"></script>
+<script async src="https://js.stripe.com/v3/buy-button.js"></script>
 </body>
 </html>
