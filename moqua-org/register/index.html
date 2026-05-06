@@ -218,8 +218,11 @@
           <div class="payment-option-name">Credit Card or ACH</div>
         </div>
         <div class="payment-option-body">Pay securely by credit card. A $3.00 processing fee is included. Select the number of seats after clicking below.</div>
-        <div style="margin-top:10px;">
-          <a href="https://buy.stripe.com/test_bJe9AUb5m1oO5YG5zs1wY00" target="_blank" rel="noopener" class="stripe-pay-btn">Pay by Credit Card or ACH →</a>
+        <div style="margin-top:10px;display:block;width:100%;overflow:hidden;">
+          <stripe-buy-button
+            buy-button-id="buy_btn_1TTvWNGrXYF8eM203yXBo2em"
+            publishable-key="pk_live_51TTt8UGrXYF8eM202dAloYRamedF2tZw0F6QmmUJhFnReWoaL7jI8lieQZyI68PWyuZGQL4P8iievJsTYdMtYEAG00K8keC8d5"
+          ></stripe-buy-button>
         </div>
         <div class="payment-option-tag">+$3.00 processing fee · powered by Stripe</div>
       </div>
@@ -263,5 +266,6 @@
 </footer>
 
 <script src="../js/main.js"></script>
+<script async src="https://js.stripe.com/v3/buy-button.js"></script>
 </body>
 </html>

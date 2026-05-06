@@ -2541,6 +2541,7 @@ button, input, select, textarea { font-family: inherit; }
   border-radius: 3px;
 }
 .stripe-pay-btn:hover { background: var(--red-dk); color: #fff; }
+stripe-buy-button { display: block !important; width: 100% !important; min-width: 0 !important; }
 .qr-placeholder {
   width: 100%;
   background: var(--white);
